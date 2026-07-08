@@ -1,0 +1,82 @@
+[
+  {
+    "id": "wmcl-2011-fundacion",
+    "year": 2011,
+    "title": "Se funda Wikimedia Chile",
+    "body": "Se funda Wikimedia Chile, reconocido oficialmente como un capítulo Wikimedia por la Fundación Wikimedia.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2012-talleres",
+    "year": 2012,
+    "title": "Primeros talleres de edición",
+    "body": "Primeras actividades públicas y talleres de edición en universidades.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2012-iberoconf",
+    "year": 2012,
+    "title": "Chile organiza el Iberoconf",
+    "body": "Organización del Encuentro Wikimedia Iberoamericano (Iberoconf) en Santiago.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2020-patrimonio",
+    "year": 2020,
+    "title": "Se consolida el trabajo en patrimonio",
+    "body": "Se consolida el trabajo en educación, memoria y patrimonio cultural.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2022-dia-patrimonios",
+    "year": 2022,
+    "title": "Alianza en el Día de los Patrimonios",
+    "body": "Participación en la celebración del Día de los Patrimonios junto a Injuv y el Consejo de los Monumentos de Chile.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2024-wiki-advocacy",
+    "year": 2024,
+    "title": "Santiago reúne a Wikimedistas del mundo",
+    "body": "Organización de la conferencia Wiki Advocacy Meet Up que reunió a Wikimedistas de más de 20 países por primera vez en Santiago.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2025-referente",
+    "year": 2025,
+    "title": "Referente en conocimiento abierto",
+    "body": "Actual referente local en acceso al conocimiento abierto, educación y comunidades digitales. Con participaciones en eventos nacionales e internacionales como Congreso Futuro, Foro de Gobernanza de Internet (IGF) y Wikimania. Además de firmas de convenios con organizaciones como el Museo Interactivo Mirador, Fundación Imagen de Chile, Amnistía Internacional y la Universidad de Chile.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  },
+  {
+    "id": "wmcl-2026-wikimania-host",
+    "year": 2026,
+    "title": "Santiago será sede de Wikimanía 2027",
+    "body": "Wikimedia Chile se anuncia como host de Wikimanía 2027, la conferencia global más grande del movimiento Wikimedia. Es la primera vez que el encuentro se celebra en Santiago.",
+    "type": null,
+    "url": null,
+    "youtubeId": null,
+    "scope": "chile"
+  }
+]

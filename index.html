@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>wikimedia-cl-15</title>
+    </head>
+    <body>
+        <div id="app">
+            <header class="sticky top-0 z-50 bg-surface">
+                <div>
+                    <!-- logo / nombre del sitio -->
+                </div>
+                <nav>
+                    <!-- placeholders de filtro por tipo, sin lógica aún -->
+                    <button type="button" data-filter="article">
+                        Artículos
+                    </button>
+                    <button type="button" data-filter="news">Noticias</button>
+                    <button type="button" data-filter="video">Videos</button>
+                </nav>
+                <div>
+                    <!-- placeholder buscador, sin lógica aún -->
+                    <input type="search" placeholder="Buscar hito..." />
+                </div>
+            </header>
+
+            <main class="bg-base text-text">
+                <ol id="timeline">
+                    <!-- aquí irá el timeline en zigzag -->
+                </ol>
+            </main>
+
+            <footer class="bg-surface">
+                <!-- links, redes -->
+            </footer>
+        </div>
+        <script type="module" src="/src/main.js"></script>
+    </body>
+</html>

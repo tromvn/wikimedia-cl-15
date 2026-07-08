@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+    --color-base: #1a1625;
+    --color-surface: #2a2337; /*nav/footer*/
+    --color-overlay: #2a2337; /*popups*/
+    --color-scrim: #000000;
+    --color-text: #f9f9f0;
+    --color-brand: #b3adde; /* headers/links, variante clara de #5748b5 */
+    --color-accent-blue: #049dff; /* tarjetas, botones */
+    --color-accent-green: #308557; /*íconos, bordes y fondos de badge*/
+    --color-accent-green-text: #8fd4ac; /* texto sobre verde, si se necesita */
+}
+
+#timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 2.5rem;
+    position: relative;
+    list-style: none;
+    padding: 2rem 0;
+}
+
+.hito {
+    grid-column: 1;
+}
+
+.hito:nth-child(even) {
+    grid-column: 2;
+}
+
+.hito {
+    position: relative;
+}
+
+.hito-marker {
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-accent-blue);
+}
+
+.hito:nth-child(odd) .hito-marker {
+    right: 0;
+    transform: translateX(50%);
+}
+
+.hito:nth-child(even) .hito-marker {
+    left: 0;
+    transform: translateX(-50%);
+}
