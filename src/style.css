@@ -1,19 +1,23 @@
 @import "tailwindcss";
 
 @theme {
+    /* Superficies */
     --color-base: #1a1625;
     --color-surface: #2a2337; /*nav/footer*/
     --color-overlay: #2a2337; /*popups*/
     --color-scrim: #000000;
+
+    /* Tipografía */
     --color-text: #f9f9f0;
     --color-brand: #b3adde; /* headers/links, variante clara de #5748b5 */
+
+    /* Acentos */
     --color-accent-blue: #049dff; /* tarjetas, botones */
     --color-accent-green: #308557; /*íconos, bordes y fondos de badge*/
     --color-accent-green-text: #8fd4ac; /* texto sobre verde, si se necesita */
 }
 
 /* ===== Layout ===== */
-
 #timeline {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -33,7 +37,6 @@
 }
 
 /* ===== Hitos ===== */
-
 .hito {
     grid-column: 1;
     position: relative;
@@ -43,11 +46,17 @@
     grid-column: 2;
 }
 
-/*.hito {
-}*/
+/* Alinea las tarjetas hacia el eje central del timeline */
+.hito:nth-child(odd) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hito:nth-child(even) {
+    display: flex;
+}
 
 /* ===== Tarjetas ===== */
-
 .hito-card {
     position: relative;
 
@@ -134,16 +143,6 @@
 .hito:nth-child(even) .hito-marker {
     left: 0;
     transform: translateX(-50%);
-}
-
-/* Alinea las tarjetas hacia el eje central del timeline */
-.hito:nth-child(odd) {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.hito:nth-child(even) {
-    display: flex;
 }
 
 /* ===== Línea temporal ===== */
