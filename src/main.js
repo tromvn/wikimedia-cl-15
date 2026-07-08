@@ -9,8 +9,11 @@ timelineEl.innerHTML = hitos
     (hito, index) => `
     <li class="hito" data-index="${index}" data-type="${hito.type ?? "pending"}">
       <span class="hito-marker"></span>
-      <span class="hito-year">${hito.year}</span>
-      <h3 class="hito-title">${hito.title}</h3>
+
+      <article class="hito-card">
+        <span class="hito-year">${hito.year}</span>
+        <h3 class="hito-title">${hito.title}</h3>
+      </article>
     </li>
   `,
   )

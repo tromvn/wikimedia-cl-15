@@ -23,6 +23,13 @@
     min-height: 500px; /* Altura mínima para el SVG */
 }
 
+.timeline-section {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-block: 4rem;
+}
+
 .hito {
     grid-column: 1;
 }
@@ -33,6 +40,9 @@
 
 .hito {
     position: relative;
+}
+
+.hito-card {
     padding: 1rem;
 }
 
