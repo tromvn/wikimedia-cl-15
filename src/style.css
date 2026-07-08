@@ -43,7 +43,52 @@
 }
 
 .hito-card {
-    padding: 1rem;
+    position: relative;
+
+    padding: 1.25rem;
+
+    border-radius: 1rem;
+
+    background: var(--color-surface);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.hito-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--color-brand);
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hito-year {
+    display: block;
+
+    margin-bottom: 0.5rem;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    color: var(--color-brand);
+}
+
+.hito-title {
+    font-size: 1.35rem;
+
+    font-weight: 700;
+
+    line-height: 1.3;
 }
 
 .hito-marker {
@@ -64,6 +109,14 @@
 .hito:nth-child(even) .hito-marker {
     left: 0;
     transform: translateX(-50%);
+}
+
+.hito:nth-child(odd) .hito-card {
+    margin-right: 1rem;
+}
+
+.hito:nth-child(even) .hito-card {
+    margin-left: 1rem;
 }
 
 .timeline-svg {
