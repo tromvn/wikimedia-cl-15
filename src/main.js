@@ -3,7 +3,7 @@ import hitos from "./data/hitos.json";
 
 const timelineEl = document.querySelector("#timeline");
 
-// Crear estructura HTML de los hitos
+/* ===== Renderizado inicial ===== */
 timelineEl.innerHTML = hitos
   .map(
     (hito, index) => `
@@ -19,7 +19,7 @@ timelineEl.innerHTML = hitos
   )
   .join("");
 
-// Añadir SVG para la línea curva
+/* ===== SVG ===== */
 const svgNS = "http://www.w3.org/2000/svg";
 const svgEl = document.createElementNS(svgNS, "svg");
 svgEl.setAttribute("class", "timeline-svg");
@@ -38,64 +38,79 @@ pathEl.setAttribute("stroke-width", "3");
 
 svgEl.appendChild(pathEl);
 
-// Calcular posiciones de los marcadores y dibujar línea curva
-function drawCurvedTimeline() {
+/* ===== Timeline ===== */
+function getMarkerPositions() {
   const markers = document.querySelectorAll(".hito-marker");
-  const hitoElements = document.querySelectorAll(".hito");
+  const timelineRect = timelineEl.getBoundingClientRect();
 
-  if (markers.length === 0) return;
+  return [...markers].map((marker) => {
+    const rect = marker.getBoundingClientRect();
 
+    return {
+      x: rect.left - timelineRect.left + rect.width / 2,
+      y: rect.top - timelineRect.top + rect.height / 2,
+    };
+  });
+}
+
+
+function buildBezierPath(positions) {
   let pathData = "";
 
-  markers.forEach((marker, index) => {
-    const rect = marker.getBoundingClientRect();
-    const hitoRect = hitoElements[index].getBoundingClientRect();
-    const timelineRect = timelineEl.getBoundingClientRect();
-
-    // Coordenadas relativas al timeline
-    const x = rect.left - timelineRect.left + rect.width / 2;
-    const y = rect.top - timelineRect.top + rect.height / 2;
+  positions.forEach((point, index) => {
+    const { x, y } = point;
 
     if (index === 0) {
-      // Primer punto: mover a posición inicial
       pathData += `M ${x} ${y} `;
-    } else {
-      // Puntos intermedios: curva suave
-      const prevMarker = markers[index - 1];
-      const prevRect = prevMarker.getBoundingClientRect();
-      const prevX = prevRect.left - timelineRect.left + prevRect.width / 2;
-      const prevY = prevRect.top - timelineRect.top + prevRect.height / 2;
-
-      // Control points para curva bezier
-      const controlX1 = prevX + (x - prevX) / 3;
-      const controlY1 = prevY;
-      const controlX2 = x - (x - prevX) / 3;
-      const controlY2 = y;
-
-      pathData += `C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x} ${y} `;
+      return;
     }
+
+    const prev = positions[index - 1];
+
+    const controlX1 = prev.x + (x - prev.x) / 3;
+    const controlY1 = prev.y;
+
+    const controlX2 = x - (x - prev.x) / 3;
+    const controlY2 = y;
+
+    pathData += `C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x} ${y} `;
   });
 
-  pathEl.setAttribute("d", pathData);
+  return pathData;
+}
 
-  const length = pathEl.getTotalLength();
-  pathEl.style.strokeDasharray = length;
-  pathEl.style.strokeDashoffset = length;
+
+function animatePath(pathElement) {
+  const length = pathElement.getTotalLength();
+
+  pathElement.style.strokeDasharray = length;
+  pathElement.style.strokeDashoffset = length;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      pathEl.style.strokeDashoffset = "0";
+      pathElement.style.strokeDashoffset = "0";
     });
   });
-  // pathEl.getBoundingClientRect(); // fuerza reflow antes de animar
-
-  // pathEl.style.strokeDashoffset = "0";
 }
 
-// Dibujar línea curva después de que el DOM esté cargado y renderizado
-setTimeout(drawCurvedTimeline, 100);
 
-// Redibujar si hay cambios de tamaño
+function renderTimeline() {
+  const positions = getMarkerPositions();
+
+  if (positions.length === 0) return;
+
+  const pathData = buildBezierPath(positions);
+
+  pathEl.setAttribute("d", pathData);
+
+  animatePath(pathEl);
+}
+
+
+/* ===== Inicialización ===== */
+setTimeout(renderTimeline, 100);
+
+
 window.addEventListener("resize", () => {
-  setTimeout(drawCurvedTimeline, 100);
+  setTimeout(renderTimeline, 100);
 });
