@@ -25,7 +25,6 @@ const svgEl = document.createElementNS(svgNS, "svg");
 svgEl.setAttribute("class", "timeline-svg");
 svgEl.setAttribute("width", "100%");
 svgEl.setAttribute("height", "100%");
-svgEl.setAttribute("viewBox", "0 0 100% 100%");
 svgEl.setAttribute("preserveAspectRatio", "none");
 
 timelineEl.prepend(svgEl);
@@ -78,6 +77,19 @@ function drawCurvedTimeline() {
   });
 
   pathEl.setAttribute("d", pathData);
+
+  const length = pathEl.getTotalLength();
+  pathEl.style.strokeDasharray = length;
+  pathEl.style.strokeDashoffset = length;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      pathEl.style.strokeDashoffset = "0";
+    });
+  });
+  // pathEl.getBoundingClientRect(); // fuerza reflow antes de animar
+
+  // pathEl.style.strokeDashoffset = "0";
 }
 
 // Dibujar línea curva después de que el DOM esté cargado y renderizado

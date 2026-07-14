@@ -59,19 +59,12 @@
 /* ===== Tarjetas ===== */
 .hito-card {
     position: relative;
-
-    margin-top: 0.75rem;
-
+    z-index: 2;
     max-width: 32rem;
-
     padding: 1.5rem;
-
     border-radius: 1rem;
-
     background: var(--color-surface);
-
     border: 1px solid rgba(255, 255, 255, 0.08);
-
     transition:
         transform 180ms ease,
         border-color 180ms ease,
@@ -83,7 +76,7 @@
 
     border-color: var(--color-brand);
 
-    box-shadow: 0 12px 232px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
 }
 
 /* Separa visualmente la tarjeta del marcador */
@@ -158,13 +151,5 @@
 }
 
 .timeline-path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawTimeline 2s ease-in-out forwards;
-}
-
-@keyframes drawTimeline {
-    to {
-        stroke-dashoffset: 0;
-    }
+    transition: stroke-dashoffset 10s ease-in-out;
 }
