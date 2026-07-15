@@ -16,11 +16,27 @@ timelineEl.innerHTML = hitosOrdenados
         <span class="hito-year">${hito.date.slice(0, 4)}</span>
         <h3 class="hito-title">${hito.title}</h3>
         <p class="hito-body">${hito.body}</p>
+
+        <button class="hito-actions""></button>
       </article>
     </li>
   `,
   )
   .join("");
+
+document.querySelectorAll(".hito").forEach((hitoElement, index) => {
+  const hito = hitosOrdenados[index];
+  const bodyElement = hitoElement.querySelector(".hito-body");
+  const actionsElement = hitoElement.querySelector(".hito-actions");
+
+  if (shouldShowAction(hito, bodyElement)) {
+    actionsElement.innerHTML = `
+      <button class="hito-action" type="button" data-hito-id="${hito.id}">
+        Ver hito
+      </button>
+    `;
+  }
+});
 
 /* ===== SVG ===== */
 const svgNS = "http://www.w3.org/2000/svg";
@@ -80,6 +96,21 @@ function buildBezierPath(positions) {
   });
 
   return pathData;
+}
+
+
+function hasAdditionalContent(hito) {
+  return Boolean(hito.image || hito.url || hito.youtubeId);
+}
+
+
+function isTextTruncated(element) {
+  return element.scrollHeight > element.clientHeight;
+}
+
+
+function shouldShowAction(hito, bodyElement) {
+  return hasAdditionalContent(hito) || isTextTruncated(bodyElement);
 }
 
 
