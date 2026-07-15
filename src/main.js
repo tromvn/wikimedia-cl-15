@@ -4,15 +4,18 @@ import hitos from "./data/hitos.json";
 const timelineEl = document.querySelector("#timeline");
 
 /* ===== Renderizado inicial ===== */
-timelineEl.innerHTML = hitos
+const hitosOrdenados = [...hitos].sort((a, b) => a.date.localeCompare(b.date));
+
+timelineEl.innerHTML = hitosOrdenados
   .map(
     (hito, index) => `
-    <li class="hito" data-index="${index}" data-type="${hito.type ?? "pending"}">
+    <li class="hito" data-index="${index}" data-type="${hito.type ?? "pending"}" data-category="${hito.category}">
       <span class="hito-marker"></span>
 
       <article class="hito-card">
-        <span class="hito-year">${hito.year}</span>
+        <span class="hito-year">${hito.date.slice(0, 4)}</span>
         <h3 class="hito-title">${hito.title}</h3>
+        <p class="hito-body">${hito.body}</p>
       </article>
     </li>
   `,

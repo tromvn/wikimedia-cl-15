@@ -92,17 +92,11 @@
 
 .hito-year {
     display: block;
-
     margin-bottom: 0.5rem;
-
     font-size: 0.9rem;
-
     font-weight: 700;
-
     letter-spacing: 0.12em;
-
     text-transform: uppercase;
-
     color: var(--color-brand);
 }
 
@@ -151,5 +145,5 @@
 }
 
 .timeline-path {
-    transition: stroke-dashoffset 10s ease-in-out;
+    transition: stroke-dashoffset 2s ease-in-out;
 }
