@@ -113,7 +113,6 @@ function renderTimeline() {
 /* ===== Inicialización ===== */
 setTimeout(renderTimeline, 100);
 
-
 window.addEventListener("resize", () => {
   setTimeout(renderTimeline, 100);
 });
