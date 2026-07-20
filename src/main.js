@@ -3,6 +3,10 @@ import hitos from "./data/hitos.json";
 
 const timelineEl = document.querySelector("#timeline");
 
+const dialogEl = document.querySelector("#hito-dialog");
+const dialogContentEl = dialogEl.querySelector(".dialog-content");
+const closeButtonEl = dialogEl.querySelector(".dialog-close");
+
 /* ===== Renderizado inicial ===== */
 const hitosOrdenados = [...hitos].sort((a, b) => a.date.localeCompare(b.date));
 
@@ -72,7 +76,6 @@ function getMarkerPositions() {
   });
 }
 
-
 function buildBezierPath(positions) {
   let pathData = "";
 
@@ -98,21 +101,82 @@ function buildBezierPath(positions) {
   return pathData;
 }
 
-
 function hasAdditionalContent(hito) {
   return Boolean(hito.image || hito.url || hito.youtubeId);
 }
-
 
 function isTextTruncated(element) {
   return element.scrollHeight > element.clientHeight;
 }
 
-
 function shouldShowAction(hito, bodyElement) {
   return hasAdditionalContent(hito) || isTextTruncated(bodyElement);
 }
 
+function getHitoById(id) {
+  return hitosOrdenados.find((hito) => hito.id === id);
+}
+
+function renderHitoDialog(hito) {
+  dialogContentEl.innerHTML = `
+    <span class="dialog-year">${hito.date.slice(0, 4)}</span>
+    <h2 class="dialog-title">${hito.title}</h2>
+    <p class="dialog-body">${hito.body}</p>
+
+    ${
+      hito.image
+        ? `
+          <img
+            class="dialog-image"
+            src="${hito.image}"
+            alt="${hito.title}"
+          />
+        `
+        : ""
+    }
+    ${hito.youtubeId ? renderYouTubeEmbed(hito.youtubeId) : ""}
+    ${
+      hito.url
+        ? `
+              <a
+                class="dialog-link"
+                href="${hito.url}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver recurso relacionado
+              </a>
+            `
+        : ""
+    }
+  `;
+}
+
+function renderYouTubeEmbed(youtubeId) {
+  return `
+    <div class="dialog-video">
+      <iframe
+        src="https://www.youtube.com/embed/${youtubeId}"
+        title="Video relacionado"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  `;
+}
+
+function handleHitoAction(event) {
+  const button = event.target.closest(".hito-action");
+
+  if (!button) return;
+
+  const hito = getHitoById(button.dataset.hitoId);
+
+  if (!hito) return;
+
+  renderHitoDialog(hito);
+  dialogEl.showModal();
+}
 
 function animatePath(pathElement) {
   const length = pathElement.getTotalLength();
@@ -127,7 +191,6 @@ function animatePath(pathElement) {
   });
 }
 
-
 function renderTimeline() {
   const positions = getMarkerPositions();
 
@@ -140,8 +203,13 @@ function renderTimeline() {
   animatePath(pathEl);
 }
 
-
 /* ===== Inicialización ===== */
+timelineEl.addEventListener("click", handleHitoAction);
+
+closeButtonEl.addEventListener("click", () => {
+  dialogEl.close();
+});
+
 setTimeout(renderTimeline, 100);
 
 window.addEventListener("resize", () => {
