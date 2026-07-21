@@ -12,12 +12,8 @@ export function hasAdditionalContent(hito) {
   return Boolean(hito.image || hito.url || hito.youtubeId);
 }
 
-export function isTextTruncated(element) {
-  return element.scrollHeight > element.clientHeight;
-}
-
-export function shouldShowAction(hito, bodyElement) {
-  return hasAdditionalContent(hito) || isTextTruncated(bodyElement);
+export function shouldShowAction(hito, isTruncated) {
+  return hasAdditionalContent(hito) || isTruncated;
 }
 
 export function getFilteredHitos(filterType, searchQuery) {

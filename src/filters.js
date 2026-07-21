@@ -51,6 +51,10 @@ export function initFilters() {
   searchInput.addEventListener("input", applySearch);
 }
 
+export function isTextTruncated(element) {
+  return element.scrollHeight > element.clientHeight;
+}
+
 export function renderActions() {
   document.querySelectorAll(".hito:not(.hito--hidden)").forEach((hitoElement) => {
     const id = hitoElement.dataset.id;
@@ -61,7 +65,9 @@ export function renderActions() {
     const bodyElement = hitoElement.querySelector(".hito-body");
     const actionsElement = hitoElement.querySelector(".hito-actions");
 
-    if (shouldShowAction(hito, bodyElement)) {
+    const truncated = isTextTruncated(bodyElement);
+
+    if (shouldShowAction(hito, truncated)) {
       actionsElement.innerHTML = `
         <button class="hito-action" type="button" data-hito-id="${hito.id}">
           Ver hito
