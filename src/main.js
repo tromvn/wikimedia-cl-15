@@ -21,7 +21,7 @@ timelineEl.innerHTML = hitosOrdenados
         <h3 class="hito-title">${hito.title}</h3>
         <p class="hito-body">${hito.body}</p>
 
-        <button class="hito-actions""></button>
+        <button class="hito-actions"></button>
       </article>
     </li>
   `,

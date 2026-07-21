@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,25 +7,43 @@
     </head>
     <body>
         <div id="app">
-            <header class="sticky top-0 z-50 bg-surface">
-                <div>
-                    <!-- logo / nombre del sitio -->
-                </div>
-                <nav>
-                    <!-- placeholders de filtro por tipo, sin lógica aún -->
-                    <button type="button" data-filter="article">
-                        Artículos
-                    </button>
-                    <button type="button" data-filter="news">Noticias</button>
-                    <button type="button" data-filter="video">Videos</button>
-                </nav>
-                <div>
-                    <!-- placeholder buscador, sin lógica aún -->
-                    <input type="search" placeholder="Buscar hito..." />
+            <header class="site-header">
+                <div class="site-header-inner">
+                    <a href="/" class="site-brand">
+                        Wikimedia Chile
+                    </a>
+
+                    <div class="timeline-controls">
+                        <div class="timeline-filters" aria-label="Filtrar hitos">
+                            <button type="button" data-filter="article">
+                                Artículos
+                            </button>
+
+                            <button type="button" data-filter="news">
+                                Noticias
+                            </button>
+
+                            <button type="button" data-filter="video">
+                                Videos
+                            </button>
+                        </div>
+
+                        <div class="timeline-search">
+                            <input
+                                type="search"
+                                placeholder="Buscar hito..."
+                                aria-label="Buscar hito"
+                            />
+                        </div>
+                    </div>
                 </div>
             </header>
 
-            <main class="bg-base text-text">
+            <main class="site-main">
+                <section class="hero">
+                    <!-- Banner conmemorativo -->
+                </section>
+
                 <section class="timeline-section">
                     <ol id="timeline"></ol>
                 </section>

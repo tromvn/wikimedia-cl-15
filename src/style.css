@@ -17,6 +17,55 @@
     --color-accent-green-text: #8fd4ac; /* texto sobre verde, si se necesita */
 }
 
+/* ===== Site Header ===== */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: var(--color-surface);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 1rem 1.5rem;
+}
+
+/* ===== Site Brand ===== */
+.site-brand {
+    color: var(--color-text);
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+/* ===== Hero ===== */
+.site-main {
+    background: var(--color-base);
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+.hero {
+    min-height: 22rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 3rem 1.5rem;
+}
+
 /* ===== Layout ===== */
 #timeline {
     display: grid;
@@ -85,7 +134,6 @@
 .hito:nth-child(even) .hito-card {
     margin-left: 1rem;
 }
-
 
 /* ===== Contenido ===== */
 .hito-body {
@@ -226,14 +274,33 @@
     }
 
     #hito-dialog {
-        width: calc(100vw - 2 rem);
+        width: calc(100vw - 2rem);
     }
 
     .dialog-panel {
         padding: 1rem;
     }
-}
 
+    .site-header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .timeline-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .timeline-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .timeline-search input {
+        width: 100%;
+    }
+}
 
 /* ===== Dialog content ===== */
 
@@ -289,7 +356,6 @@
     border: 0;
 }
 
-
 /* ===== Dialog close button ===== */
 
 .dialog-close {
@@ -324,4 +390,22 @@
 .dialog-close:focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 3px;
+}
+
+/* ===== Timeline Controls ===== */
+
+.timeline-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timeline-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-search {
+    display: flex;
 }
