@@ -92,5 +92,8 @@ export function renderPath() {
   if (!animated) {
     animatePath();
     animated = true;
+  } else {
+    pathEl.style.strokeDasharray = "";
+    pathEl.style.strokeDashoffset = "";
   }
 }
