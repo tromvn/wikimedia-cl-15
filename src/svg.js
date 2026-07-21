@@ -5,6 +5,8 @@ let animated = false;
 export function initSVG(timelineContainer) {
   timelineEl = timelineContainer;
 
+  if (pathEl) return;
+
   const svgNS = "http://www.w3.org/2000/svg";
   const svgEl = document.createElementNS(svgNS, "svg");
   svgEl.setAttribute("class", "timeline-svg");
