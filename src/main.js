@@ -1,5 +1,5 @@
 import "./style.css";
-import { hitos, shouldShowAction } from "./data.js";
+import { hitos } from "./data.js";
 import { initSVG, renderPath } from "./svg.js";
 import { initDialog } from "./dialog.js";
 import { initFilters, renderActions } from "./filters.js";
@@ -30,13 +30,21 @@ function renderTimeline() {
   renderPath();
 }
 
-renderTimeline();
+function initApp() {
+  renderTimeline();
 
-initDialog();
-initFilters();
+  initDialog();
+  initFilters();
 
-let resizeTimer;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(renderPath, 100);
-});
+  initResizeHandler();
+}
+
+function initResizeHandler() {
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(renderPath, 100);
+  });
+};
+
+initApp();
