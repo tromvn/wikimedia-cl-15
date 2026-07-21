@@ -1,4 +1,8 @@
-import { getFilteredHitos, shouldShowAction } from "./data.js";
+import {
+  getFilteredHitos,
+  getHitoById,
+  shouldShowAction
+} from "./data.js";
 import { renderPath } from "./svg.js";
 
 const timelineEl = document.querySelector("#timeline");
@@ -48,9 +52,10 @@ export function initFilters() {
 }
 
 export function renderActions() {
-  document.querySelectorAll(".hito:not(.hito--hidden)").forEach((hitoElement, index) => {
-    const hitos = getFilteredHitos(activeFilter, searchQuery);
-    const hito = hitos[index];
+  document.querySelectorAll(".hito:not(.hito--hidden)").forEach((hitoElement) => {
+    const id = hitoElement.dataset.id;
+    const hito = getHitoById(id);
+
     if (!hito) return;
 
     const bodyElement = hitoElement.querySelector(".hito-body");
