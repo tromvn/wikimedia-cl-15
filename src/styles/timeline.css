@@ -250,6 +250,7 @@
 /* ===== Timeline Controls ===== */
 .timeline-controls {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
 }
@@ -288,6 +289,17 @@
     border-color: var(--color-accent-blue);
     color: var(--color-base);
     font-weight: 600;
+}
+
+.timeline-filters--categories button.filter--active {
+    background: var(--color-accent-green);
+    border-color: var(--color-accent-green);
+    color: var(--color-base);
+}
+
+.timeline-filters--categories button:hover {
+    border-color: var(--color-accent-green);
+    color: var(--color-accent-green-text);
 }
 
 .timeline-search input {

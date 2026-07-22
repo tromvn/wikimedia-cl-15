@@ -8,18 +8,20 @@ import { renderPath } from "./svg.js";
 
 const timelineEl = document.querySelector("#timeline");
 const filterButtons = document.querySelectorAll("[data-filter]");
+const categoryButtons = document.querySelectorAll("[data-category]");
 const searchInput = document.querySelector(".timeline-search input");
 const searchClear = document.querySelector(".search-clear");
 
 let activeFilter = null;
+let activeCategory = null;
 let searchQuery = "";
 let debounceTimer = null;
 
 const layoutPattern = ["center", "left", "right"];
 
-function renderVisible(filterType, query) {
+function renderVisible(filterType, query, filterCategory) {
   const visibleIds = new Set(
-    getFilteredHitos(filterType, query).map((h) => h.id),
+    getFilteredHitos(filterType, query, filterCategory).map((h) => h.id),
   );
 
   document.querySelectorAll(".hito").forEach((el) => {
@@ -53,13 +55,13 @@ function setActiveFilter(type) {
     btn.setAttribute("aria-pressed", isActive);
   });
 
-  renderVisible(activeFilter, searchQuery);
+  renderVisible(activeFilter, searchQuery, activeCategory);
 }
 
 function applySearch() {
   searchQuery = searchInput.value.trim();
   searchClear.classList.toggle("search-clear--visible", searchQuery.length > 0);
-  renderVisible(activeFilter, searchQuery);
+  renderVisible(activeFilter, searchQuery, activeCategory);
 }
 
 function debouncedSearch() {
@@ -67,11 +69,23 @@ function debouncedSearch() {
   debounceTimer = setTimeout(applySearch, 200);
 }
 
+function setActiveCategory(category) {
+  activeCategory = activeCategory === category ? null : category;
+
+  categoryButtons.forEach((btn) => {
+    const isActive = btn.dataset.category === activeCategory;
+    btn.classList.toggle("filter--active", isActive);
+    btn.setAttribute("aria-pressed", isActive);
+  });
+
+  renderVisible(activeFilter, searchQuery, activeCategory);
+}
+
 function clearSearch() {
   searchInput.value = "";
   searchQuery = "";
   searchClear.classList.remove("search-clear--visible");
-  renderVisible(activeFilter, searchQuery);
+  renderVisible(activeFilter, searchQuery, activeCategory);
   searchInput.focus();
 }
 
@@ -79,6 +93,11 @@ export function initFilters() {
   filterButtons.forEach((btn) => {
     btn.setAttribute("aria-pressed", "false");
     btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter));
+  });
+
+  categoryButtons.forEach((btn) => {
+    btn.setAttribute("aria-pressed", "false");
+    btn.addEventListener("click", () => setActiveCategory(btn.dataset.category));
   });
 
   searchInput.addEventListener("input", debouncedSearch);

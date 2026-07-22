@@ -34,9 +34,10 @@ export function shouldShowAction(hito, isTruncated) {
   return hasAdditionalContent(hito) || isTruncated;
 }
 
-export function getFilteredHitos(filterType, searchQuery) {
+export function getFilteredHitos(filterType, searchQuery, filterCategory) {
   return hitos.filter((hito) => {
     if (filterType && hito.type !== filterType) return false;
+    if (filterCategory && hito.category !== filterCategory) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       if (
