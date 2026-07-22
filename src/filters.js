@@ -9,9 +9,11 @@ import { renderPath } from "./svg.js";
 const timelineEl = document.querySelector("#timeline");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const searchInput = document.querySelector(".timeline-search input");
+const searchClear = document.querySelector(".search-clear");
 
 let activeFilter = null;
 let searchQuery = "";
+let debounceTimer = null;
 
 const layoutPattern = ["center", "left", "right"];
 
@@ -56,7 +58,21 @@ function setActiveFilter(type) {
 
 function applySearch() {
   searchQuery = searchInput.value.trim();
+  searchClear.classList.toggle("search-clear--visible", searchQuery.length > 0);
   renderVisible(activeFilter, searchQuery);
+}
+
+function debouncedSearch() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(applySearch, 200);
+}
+
+function clearSearch() {
+  searchInput.value = "";
+  searchQuery = "";
+  searchClear.classList.remove("search-clear--visible");
+  renderVisible(activeFilter, searchQuery);
+  searchInput.focus();
 }
 
 export function initFilters() {
@@ -65,7 +81,9 @@ export function initFilters() {
     btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter));
   });
 
-  searchInput.addEventListener("input", applySearch);
+  searchInput.addEventListener("input", debouncedSearch);
+  searchInput.addEventListener("search", applySearch);
+  searchClear.addEventListener("click", clearSearch);
 }
 
 export function isTextTruncated(element) {
