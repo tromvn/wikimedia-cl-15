@@ -54,6 +54,16 @@ function renderHitoDialog(hito) {
   `;
 }
 
+function updateUrl(hitoId) {
+  const url = new URL(window.location);
+  if (hitoId) {
+    url.searchParams.set("hito", hitoId);
+  } else {
+    url.searchParams.delete("hito");
+  }
+  history.replaceState(null, "", url);
+}
+
 function handleHitoAction(event) {
   const button = event.target.closest(".hito-action");
   if (!button) return;
@@ -61,18 +71,39 @@ function handleHitoAction(event) {
   const hito = getHitoById(button.dataset.hitoId);
   if (!hito) return;
 
+  openHitoDialog(hito.id);
+}
+
+function openHitoDialog(id) {
+  const hito = getHitoById(id);
+  if (!hito) return;
+
   renderHitoDialog(hito);
   dialogEl.showModal();
+  updateUrl(hito.id);
+}
+
+function handleClose() {
+  dialogEl.close();
+  updateUrl(null);
 }
 
 export function initDialog() {
   document.querySelector("#timeline").addEventListener("click", handleHitoAction);
 
-  closeButtonEl.addEventListener("click", () => dialogEl.close());
+  closeButtonEl.addEventListener("click", handleClose);
 
   dialogEl.addEventListener("click", (event) => {
     if (event.target === dialogEl) {
-      dialogEl.close();
+      handleClose();
     }
   });
+
+  dialogEl.addEventListener("close", () => updateUrl(null));
+}
+
+export function openDialogById(id) {
+  const el = document.querySelector(`.hito[data-id="${id}"]`);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  openHitoDialog(id);
 }

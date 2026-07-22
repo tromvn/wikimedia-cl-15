@@ -1,7 +1,7 @@
 import "./style.css";
 import { hitos } from "./data.js";
 import { initSVG, renderPath } from "./svg.js";
-import { initDialog } from "./dialog.js";
+import { initDialog, openDialogById } from "./dialog.js";
 import { initFilters, renderActions } from "./filters.js";
 
 const timelineEl = document.querySelector("#timeline");
@@ -46,6 +46,12 @@ function initApp() {
 
   initResizeHandler();
   initAnimations();
+
+  const params = new URLSearchParams(window.location.search);
+  const hitoId = params.get("hito");
+  if (hitoId) {
+    setTimeout(() => openDialogById(hitoId), 600);
+  }
 }
 
 function initAnimations() {
