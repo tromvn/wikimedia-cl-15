@@ -1,4 +1,5 @@
 import {
+  hitos,
   getFilteredHitos,
   getHitoById,
   shouldShowAction
@@ -23,6 +24,10 @@ function renderVisible(filterType, query) {
     const id = el.dataset.id;
     el.classList.toggle("hito--hidden", !visibleIds.has(id));
   });
+
+  const total = document.querySelectorAll(".hito:not(.hito--hidden)").length;
+  const isFiltered = total < hitos.length;
+  timelineEl.classList.toggle("timeline--filtered", isFiltered);
 
   const visibleEls = document.querySelectorAll(".hito:not(.hito--hidden)");
   visibleEls.forEach((el, index) => {

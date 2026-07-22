@@ -75,6 +75,11 @@
     display: none;
 }
 
+#timeline.timeline--filtered {
+    row-gap: 2rem;
+    padding: 1rem 0;
+}
+
 /* ===== Tarjetas ===== */
 .hito-card {
     position: relative;
@@ -157,8 +162,8 @@
 .hito-marker {
     position: absolute;
     top: 1.5rem;
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: var(--color-accent-blue);
     border: 3px solid var(--color-base);
@@ -170,8 +175,8 @@
 }
 
 .hito-marker-icon {
-    width: 14px;
-    height: 14px;
+    width: 22px;
+    height: 22px;
     filter: brightness(0) invert(1);
     pointer-events: none;
 }
