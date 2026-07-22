@@ -263,6 +263,7 @@
 
 .timeline-search {
     display: flex;
+    max-width: 200px;
 }
 
 .timeline-filters button {
