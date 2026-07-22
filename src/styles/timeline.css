@@ -225,6 +225,10 @@
     transition: stroke-dashoffset 2s ease-in-out;
 }
 
+.timeline-glow {
+    transition: stroke-dashoffset 2s ease-in-out;
+}
+
 /* ===== Timeline Controls ===== */
 .timeline-controls {
     display: flex;

@@ -1,4 +1,5 @@
 let pathEl = null;
+let glowEl = null;
 let timelineEl = null;
 let animated = false;
 
@@ -12,16 +13,46 @@ export function initSVG(timelineContainer) {
   svgEl.setAttribute("class", "timeline-svg");
   svgEl.setAttribute("width", "100%");
   svgEl.setAttribute("height", "100%");
-  svgEl.setAttribute("preserveAspectRatio", "none");
+  svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+  const defs = document.createElementNS(svgNS, "defs");
+  const gradient = document.createElementNS(svgNS, "linearGradient");
+  gradient.setAttribute("id", "timeline-gradient");
+  gradient.setAttribute("x1", "0%");
+  gradient.setAttribute("y1", "0%");
+  gradient.setAttribute("x2", "100%");
+  gradient.setAttribute("y2", "100%");
+
+  const stop1 = document.createElementNS(svgNS, "stop");
+  stop1.setAttribute("offset", "0%");
+  stop1.style.setProperty("stop-color", "var(--color-brand)");
+  const stop2 = document.createElementNS(svgNS, "stop");
+  stop2.setAttribute("offset", "100%");
+  stop2.style.setProperty("stop-color", "var(--color-accent-blue)");
+
+  gradient.appendChild(stop1);
+  gradient.appendChild(stop2);
+  defs.appendChild(gradient);
+  svgEl.appendChild(defs);
+
+  glowEl = document.createElementNS(svgNS, "path");
+  glowEl.setAttribute("class", "timeline-glow");
+  glowEl.setAttribute("fill", "none");
+  glowEl.setAttribute("stroke", "var(--color-accent-blue)");
+  glowEl.setAttribute("stroke-width", "24");
+  glowEl.setAttribute("opacity", "0.08");
+  glowEl.setAttribute("stroke-linecap", "round");
+  glowEl.setAttribute("stroke-linejoin", "round");
 
   pathEl = document.createElementNS(svgNS, "path");
   pathEl.setAttribute("class", "timeline-path");
   pathEl.setAttribute("fill", "none");
-  pathEl.setAttribute("stroke", "var(--color-accent-blue)");
-  pathEl.setAttribute("stroke-width", "5");
+  pathEl.setAttribute("stroke", "url(#timeline-gradient)");
+  pathEl.setAttribute("stroke-width", "8");
   pathEl.setAttribute("stroke-linecap", "round");
   pathEl.setAttribute("stroke-linejoin", "round");
 
+  svgEl.appendChild(glowEl);
   svgEl.appendChild(pathEl);
   timelineEl.prepend(svgEl);
 }
@@ -45,25 +76,24 @@ function getMarkerPositions() {
   });
 }
 
-function buildBezierPath(positions) {
-  let pathData = "";
+function buildSmoothPath(positions, tension = 0.25) {
+  if (positions.length < 2) return "";
 
-  positions.forEach((point, index) => {
-    const { x, y } = point;
+  let pathData = `M ${positions[0].x} ${positions[0].y} `;
 
-    if (index === 0) {
-      pathData += `M ${x} ${y} `;
-      return;
-    }
+  for (let i = 0; i < positions.length - 1; i++) {
+    const p0 = positions[i - 1] || positions[i];
+    const p1 = positions[i];
+    const p2 = positions[i + 1];
+    const p3 = positions[i + 2] || p2;
 
-    const prev = positions[index - 1];
-    const controlX1 = prev.x + (x - prev.x) / 3;
-    const controlY1 = prev.y;
-    const controlX2 = x - (x - prev.x) / 3;
-    const controlY2 = y;
+    const cp1x = p1.x + (p2.x - p0.x) * tension;
+    const cp1y = p1.y + (p2.y - p0.y) * tension;
+    const cp2x = p2.x - (p3.x - p1.x) * tension;
+    const cp2y = p2.y - (p3.y - p1.y) * tension;
 
-    pathData += `C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x} ${y} `;
-  });
+    pathData += `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y} `;
+  }
 
   return pathData;
 }
@@ -73,10 +103,13 @@ function animatePath() {
 
   pathEl.style.strokeDasharray = length;
   pathEl.style.strokeDashoffset = length;
+  glowEl.style.strokeDasharray = length;
+  glowEl.style.strokeDashoffset = length;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       pathEl.style.strokeDashoffset = "0";
+      glowEl.style.strokeDashoffset = "0";
     });
   });
 }
@@ -87,11 +120,13 @@ export function renderPath() {
   const positions = getMarkerPositions();
   if (positions.length === 0) {
     pathEl.setAttribute("d", "");
+    glowEl.setAttribute("d", "");
     return;
   }
 
-  const pathData = buildBezierPath(positions);
+  const pathData = buildSmoothPath(positions);
   pathEl.setAttribute("d", pathData);
+  glowEl.setAttribute("d", pathData);
 
   if (!animated) {
     animatePath();
@@ -99,5 +134,7 @@ export function renderPath() {
   } else {
     pathEl.style.strokeDasharray = "";
     pathEl.style.strokeDashoffset = "";
+    glowEl.style.strokeDasharray = "";
+    glowEl.style.strokeDashoffset = "";
   }
 }
