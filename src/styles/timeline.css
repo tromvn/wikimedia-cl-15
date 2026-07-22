@@ -40,6 +40,34 @@
     justify-content: flex-start;
 }
 
+/* Centro */
+/* .hito:nth-child(3n + 1) {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+} */
+
+/* Izquierda */
+/* .hito:nth-child(3n + 2) {
+    grid-column: 1;
+    display: flex;
+    justify-content: flex-end;
+} */
+
+/* Derecha */
+/* .hito:nth-child(3n + 3) {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-start;
+} */
+
+/* Centro */
+/* .hito:nth-child(4n) {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+} */
+
 
 
 /* ===== Hidden state (filters) ===== */
@@ -80,6 +108,18 @@
     margin-left: 0.75rem;
 }
 
+/* .hito:nth-child(4n+1) .hito-card,
+.hito:nth-child(4n+4) .hito-card {
+    margin-left: 1.5rem;
+}
+
+.hito:nth-child(4n+2) .hito-card {
+    margin-right: 1rem;
+}
+
+.hito:nth-child(4n+3) .hito-card {
+    margin-left: 1rem;
+} */
 
 /* ===== Contenido ===== */
 .hito-body {
@@ -117,19 +157,23 @@
 .hito-marker {
     position: absolute;
     top: 1.5rem;
-    width: 18px;
-    height: 18px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: var(--color-accent-blue);
     border: 3px solid var(--color-base);
     z-index: 10;
-    box-shadow: 0 0 0 4px rgba(4, 157, 255, 0.15);
-    transition: box-shadow 300ms ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.hito-card:hover + .hito-marker,
-.hito-marker:hover {
-    box-shadow: 0 0 0 8px rgba(4, 157, 255, 0.1);
+.hito-marker-icon {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) invert(1);
+    pointer-events: none;
 }
 
 .hito--center .hito-marker,
@@ -143,6 +187,21 @@
     transform: translateX(50%);
 }
 
+/* .hito:nth-child(4n+1) .hito-marker,
+.hito:nth-child(4n+4) .hito-marker {
+    left: 0;
+    transform: translateX(-50%);
+}
+
+.hito:nth-child(4n+2) .hito-marker {
+    right: 0;
+    transform: translateX(50%);
+}
+
+.hito:nth-child(4n+3) .hito-marker {
+    left: 0;
+    transform: translateX(-50%);
+} */
 
 /* ===== Línea temporal ===== */
 .timeline-svg {
@@ -153,15 +212,10 @@
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    overflow: visible;
 }
 
 .timeline-path {
-    transition: stroke-dashoffset 1.8s ease-in-out;
-}
-
-.timeline-glow {
-    transition: stroke-dashoffset 1.8s ease-in-out;
+    transition: stroke-dashoffset 2s ease-in-out;
 }
 
 /* ===== Timeline Controls ===== */

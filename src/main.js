@@ -17,7 +17,9 @@ function renderTimeline() {
 
         return `
     <li class="hito hito--${layout}" data-id="${hito.id}" data-type="${hito.type ?? ""}" data-category="${hito.category}">
-      <span class="hito-marker"></span>
+      <span class="hito-marker">
+        ${hito.icon ? `<img class="hito-marker-icon" src="${hito.icon}" alt="" aria-hidden="true" />` : ""}
+      </span>
 
       <article class="hito-card">
         <span class="hito-year">${hito.date.slice(0, 4)}</span>

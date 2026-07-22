@@ -12,6 +12,8 @@ const searchInput = document.querySelector(".timeline-search input");
 let activeFilter = null;
 let searchQuery = "";
 
+const layoutPattern = ["center", "left", "right"];
+
 function renderVisible(filterType, query) {
   const visibleIds = new Set(
     getFilteredHitos(filterType, query).map((h) => h.id),
@@ -20,6 +22,13 @@ function renderVisible(filterType, query) {
   document.querySelectorAll(".hito").forEach((el) => {
     const id = el.dataset.id;
     el.classList.toggle("hito--hidden", !visibleIds.has(id));
+  });
+
+  const visibleEls = document.querySelectorAll(".hito:not(.hito--hidden)");
+  visibleEls.forEach((el, index) => {
+    const layout = layoutPattern[index % layoutPattern.length];
+    el.classList.remove("hito--left", "hito--center", "hito--right");
+    el.classList.add(`hito--${layout}`);
   });
 
   renderPath();
