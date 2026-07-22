@@ -84,7 +84,19 @@ export function initFilters() {
   });
 
   categorySelect.addEventListener("change", () => {
-    activeCategory = categorySelect.value || null;
+    const val = categorySelect.value;
+    if (val === "__article__") {
+      activeFilter = "article";
+      activeCategory = null;
+    } else {
+      activeCategory = val || null;
+      activeFilter = null;
+    }
+    filterButtons.forEach((btn) => {
+      const isActive = btn.dataset.filter === activeFilter;
+      btn.classList.toggle("filter--active", isActive);
+      btn.setAttribute("aria-pressed", isActive);
+    });
     renderVisible(activeFilter, searchQuery, activeCategory);
   });
 
