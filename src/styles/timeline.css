@@ -41,6 +41,8 @@
 }
 
 .hito {
+    position: relative;
+    z-index: 2;
     opacity: 0;
     transform: translateY(30px);
 }
