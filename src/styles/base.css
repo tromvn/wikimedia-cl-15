@@ -1,0 +1,46 @@
+/* ===== Reset ===== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ===== Documento ===== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    background: var(--color-base);
+    color: var(--color-text);
+
+    font-family:
+        Inter,
+        system-ui,
+        sans-serif;
+}
+
+/* ===== Medios ===== */
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* ===== Formularios ===== */
+
+button,
+input {
+    font: inherit;
+}
+
+/* ===== Enlaces ===== */
+
+a {
+    color: inherit;
+}

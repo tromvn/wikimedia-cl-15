@@ -1,0 +1,17 @@
+.site-main {
+    background: var(--color-base);
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+.hero {
+    min-height: 22rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 3rem 1.5rem;
+}

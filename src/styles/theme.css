@@ -1,0 +1,13 @@
+@theme {
+    --color-base: #1a1625;
+    --color-surface: #2a2337;
+    --color-overlay: #2a2337;
+    --color-scrim: #000000;
+
+    --color-text: #f9f9f0;
+    --color-brand: #b3adde;
+
+    --color-accent-blue: #049dff;
+    --color-accent-green: #308557;
+    --color-accent-green-text: #8fd4ac;
+}

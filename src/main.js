@@ -7,10 +7,16 @@ import { initFilters, renderActions } from "./filters.js";
 const timelineEl = document.querySelector("#timeline");
 
 function renderTimeline() {
+  const layoutPattern = ["center", "left", "right"];
+
   timelineEl.innerHTML = hitos
     .map(
-      (hito, index) => `
-    <li class="hito" data-id="${hito.id}" data-type="${hito.type ?? ""}" data-category="${hito.category}">
+      (hito, index) => {
+        const layout = layoutPattern[index % layoutPattern.length];
+
+
+        return `
+    <li class="hito hito--${layout}" data-id="${hito.id}" data-type="${hito.type ?? ""}" data-category="${hito.category}">
       <span class="hito-marker"></span>
 
       <article class="hito-card">
@@ -21,8 +27,8 @@ function renderTimeline() {
         <div class="hito-actions"></div>
       </article>
     </li>
-  `,
-    )
+  `;
+      })
     .join("");
 
   renderActions();

@@ -1,0 +1,36 @@
+/* ===== Footer ===== */
+
+.site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2rem 1.5rem;
+}
+
+.site-footer-inner {
+    max-width: 1200px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+}
+
+.site-footer a {
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+    .site-footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}

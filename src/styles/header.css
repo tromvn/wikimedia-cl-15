@@ -1,0 +1,34 @@
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: var(--color-surface);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 1rem 1.5rem;
+}
+
+.site-brand img {
+    display: block;
+    height: 2rem;
+    width: auto;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+    .site-header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+}

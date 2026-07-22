@@ -1,0 +1,357 @@
+/* ===== Layout ===== */
+#timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 4rem;
+    position: relative;
+    list-style: none;
+    padding: 2rem 0;
+    min-height: 500px;
+}
+
+.timeline-section {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-block: 4rem;
+}
+
+/* ===== Hitos - 3 column serpentine pattern ===== */
+.hito {
+    position: relative;
+}
+
+.hito--center {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.hito--left {
+    grid-column: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hito--right {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Centro */
+/* .hito:nth-child(3n + 1) {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+} */
+
+/* Izquierda */
+/* .hito:nth-child(3n + 2) {
+    grid-column: 1;
+    display: flex;
+    justify-content: flex-end;
+} */
+
+/* Derecha */
+/* .hito:nth-child(3n + 3) {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-start;
+} */
+
+/* Centro */
+/* .hito:nth-child(4n) {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+} */
+
+
+
+/* ===== Hidden state (filters) ===== */
+.hito--hidden {
+    display: none;
+}
+
+/* ===== Tarjetas ===== */
+.hito-card {
+    position: relative;
+    z-index: 2;
+    max-width: 32rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.hito-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-brand);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.hito--center .hito-card {
+    margin-left: 1.5rem;
+}
+
+.hito--left .hito-card {
+    margin-right: 1rem;
+}
+
+.hito--right .hito-card {
+    margin-left: 1rem;
+}
+
+/* .hito:nth-child(4n+1) .hito-card,
+.hito:nth-child(4n+4) .hito-card {
+    margin-left: 1.5rem;
+}
+
+.hito:nth-child(4n+2) .hito-card {
+    margin-right: 1rem;
+}
+
+.hito:nth-child(4n+3) .hito-card {
+    margin-left: 1rem;
+} */
+
+/* ===== Contenido ===== */
+.hito-body {
+    margin-top: 0.75rem;
+
+    color: var(--color-text);
+    line-height: 1.6;
+
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.hito-year {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+}
+
+.hito-title {
+    font-size: 1.35rem;
+    margin-top: 0.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.35;
+}
+
+/* ===== Marcadores ===== */
+.hito-marker {
+    position: absolute;
+    top: 1.5rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-accent-blue);
+    border: 3px solid var(--color-base);
+    z-index: 10;
+}
+
+.hito--center .hito-marker,
+.hito--right .hito-marker {
+    left: 0;
+    transform: translateX(-50%);
+}
+
+.hito--left .hito-marker {
+    right: 0;
+    transform: translateX(50%);
+}
+
+/* .hito:nth-child(4n+1) .hito-marker,
+.hito:nth-child(4n+4) .hito-marker {
+    left: 0;
+    transform: translateX(-50%);
+}
+
+.hito:nth-child(4n+2) .hito-marker {
+    right: 0;
+    transform: translateX(50%);
+}
+
+.hito:nth-child(4n+3) .hito-marker {
+    left: 0;
+    transform: translateX(-50%);
+} */
+
+/* ===== Línea temporal ===== */
+.timeline-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.timeline-path {
+    transition: stroke-dashoffset 2s ease-in-out;
+}
+
+/* ===== Timeline Controls ===== */
+.timeline-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timeline-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-search {
+    display: flex;
+}
+
+.timeline-filters button {
+    padding: 0.4rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2rem;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease;
+}
+
+.timeline-filters button:hover {
+    border-color: var(--color-accent-blue);
+    color: var(--color-accent-blue);
+}
+
+.timeline-filters button.filter--active {
+    background: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
+    color: var(--color-base);
+    font-weight: 600;
+}
+
+.timeline-search input {
+    padding: 0.4rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2rem;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 180ms ease;
+}
+
+.timeline-search input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.timeline-search input:focus {
+    border-color: var(--color-accent-blue);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+    #timeline {
+        grid-template-columns: 1fr;
+        padding-left: 2rem;
+    }
+
+    .hito {
+        grid-column: 1 !important;
+    }
+
+    .hito {
+        justify-content: flex-start !important;
+    }
+
+    .hito-card {
+        max-width: none;
+        margin-left: 1rem !important;
+        margin-right: 0 !important;
+    }
+
+    .hito-marker {
+        left: 0 !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .timeline-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .timeline-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .timeline-search input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    #timeline {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hito {
+        grid-column: 1;
+    }
+
+    .hito:nth-child(even) {
+        grid-column: 2;
+    }
+
+    .hito:nth-child(odd) {
+        justify-content: flex-end;
+    }
+
+    .hito:nth-child(even) {
+        justify-content: flex-start;
+    }
+
+    .hito:nth-child(odd) .hito-marker {
+        right: 0;
+        left: auto;
+        transform: translateX(50%);
+    }
+
+    .hito:nth-child(even) .hito-marker {
+        left: 0;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .hito:nth-child(odd) .hito-card {
+        margin-right: 1rem;
+        margin-left: 0;
+    }
+
+    .hito:nth-child(even) .hito-card {
+        margin-left: 1rem;
+        margin-right: 0;
+    }
+}
