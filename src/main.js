@@ -45,6 +45,14 @@ function initApp() {
   initFilters();
 
   initResizeHandler();
+  initAnimations();
+}
+
+function initAnimations() {
+  document.querySelectorAll(".hito").forEach((el, i) => {
+    el.style.setProperty("--delay", `${i * 60}ms`);
+    el.classList.add("hito--visible");
+  });
 }
 
 function initResizeHandler() {

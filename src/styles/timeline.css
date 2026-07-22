@@ -40,6 +40,22 @@
     justify-content: flex-start;
 }
 
+.hito {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hito--visible {
+    animation: card-enter 400ms ease-out forwards;
+}
+
+@keyframes card-enter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Centro */
 /* .hito:nth-child(3n + 1) {
     grid-column: 2;

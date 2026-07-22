@@ -24,6 +24,39 @@
     gap: 0.25rem;
 }
 
+.hero-numeral,
+.hero-label,
+.hero-title,
+.hero-subtitle {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: hero-fade-in 500ms ease-out forwards;
+}
+
+.hero-numeral {
+    animation-duration: 600ms;
+    animation-delay: 0ms;
+}
+
+.hero-label {
+    animation-delay: 150ms;
+}
+
+.hero-title {
+    animation-delay: 300ms;
+}
+
+.hero-subtitle {
+    animation-delay: 400ms;
+}
+
+@keyframes hero-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .hero-numeral {
     font-size: clamp(4rem, 12vw, 8rem);
     font-weight: 800;
