@@ -8,7 +8,7 @@ import { renderPath } from "./svg.js";
 
 const timelineEl = document.querySelector("#timeline");
 const filterButtons = document.querySelectorAll("[data-filter]");
-const categoryButtons = document.querySelectorAll("[data-category]");
+const categorySelect = document.querySelector(".timeline-category-select select");
 const searchInput = document.querySelector(".timeline-search input");
 const searchClear = document.querySelector(".search-clear");
 
@@ -69,18 +69,6 @@ function debouncedSearch() {
   debounceTimer = setTimeout(applySearch, 200);
 }
 
-function setActiveCategory(category) {
-  activeCategory = activeCategory === category ? null : category;
-
-  categoryButtons.forEach((btn) => {
-    const isActive = btn.dataset.category === activeCategory;
-    btn.classList.toggle("filter--active", isActive);
-    btn.setAttribute("aria-pressed", isActive);
-  });
-
-  renderVisible(activeFilter, searchQuery, activeCategory);
-}
-
 function clearSearch() {
   searchInput.value = "";
   searchQuery = "";
@@ -95,9 +83,9 @@ export function initFilters() {
     btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter));
   });
 
-  categoryButtons.forEach((btn) => {
-    btn.setAttribute("aria-pressed", "false");
-    btn.addEventListener("click", () => setActiveCategory(btn.dataset.category));
+  categorySelect.addEventListener("change", () => {
+    activeCategory = categorySelect.value || null;
+    renderVisible(activeFilter, searchQuery, activeCategory);
   });
 
   searchInput.addEventListener("input", debouncedSearch);
