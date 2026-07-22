@@ -97,15 +97,15 @@
 }
 
 .hito--center .hito-card {
-    margin-left: 1.5rem;
+    margin-left: 0.75rem;
 }
 
 .hito--left .hito-card {
-    margin-right: 1rem;
+    margin-right: 0.75rem;
 }
 
 .hito--right .hito-card {
-    margin-left: 1rem;
+    margin-left: 0.75rem;
 }
 
 /* .hito:nth-child(4n+1) .hito-card,
