@@ -29,6 +29,9 @@ function renderVisible(filterType, query) {
   const isFiltered = total < hitos.length;
   timelineEl.classList.toggle("timeline--filtered", isFiltered);
 
+  const sectionEl = document.querySelector(".timeline-section");
+  if (sectionEl) sectionEl.classList.toggle("timeline-section--filtered", isFiltered);
+
   const visibleEls = document.querySelectorAll(".hito:not(.hito--hidden)");
   visibleEls.forEach((el, index) => {
     const layout = layoutPattern[index % layoutPattern.length];
