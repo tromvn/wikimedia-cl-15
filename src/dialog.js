@@ -4,6 +4,8 @@ const dialogEl = document.querySelector("#hito-dialog");
 const dialogContentEl = dialogEl.querySelector(".dialog-content");
 const closeButtonEl = dialogEl.querySelector(".dialog-close");
 
+let lastFocused = null;
+
 function renderYouTubeEmbed(youtubeId) {
   return `
     <div class="dialog-video">
@@ -78,18 +80,24 @@ function openHitoDialog(id) {
   const hito = getHitoById(id);
   if (!hito) return;
 
+  lastFocused = document.activeElement;
   renderHitoDialog(hito);
+  dialogEl.setAttribute("aria-label", hito.title);
   dialogEl.showModal();
   updateUrl(hito.id);
 }
 
 function handleClose() {
   dialogEl.close();
-  updateUrl(null);
 }
 
 export function initDialog() {
   document.querySelector("#timeline").addEventListener("click", handleHitoAction);
+  document.querySelector("#timeline").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      handleHitoAction(event);
+    }
+  });
 
   closeButtonEl.addEventListener("click", handleClose);
 
@@ -99,7 +107,13 @@ export function initDialog() {
     }
   });
 
-  dialogEl.addEventListener("close", () => updateUrl(null));
+  dialogEl.addEventListener("close", () => {
+    updateUrl(null);
+    if (lastFocused) {
+      lastFocused.focus();
+      lastFocused = null;
+    }
+  });
 }
 
 export function openDialogById(id) {
