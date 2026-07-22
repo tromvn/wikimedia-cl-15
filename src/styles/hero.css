@@ -5,6 +5,8 @@
 }
 
 .hero {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,6 +60,49 @@
     max-width: 32rem;
 }
 
+.hero-ornaments {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.hero-ornament {
+    position: absolute;
+    width: clamp(3rem, 8vw, 5rem);
+    height: auto;
+    opacity: 0.08;
+    filter: brightness(0) invert(1);
+}
+
+.hero-ornament--1 {
+    top: 10%;
+    left: 8%;
+    width: clamp(4rem, 10vw, 7rem);
+    opacity: 0.06;
+}
+
+.hero-ornament--2 {
+    top: 15%;
+    right: 10%;
+    width: clamp(3rem, 6vw, 4.5rem);
+    opacity: 0.1;
+}
+
+.hero-ornament--3 {
+    bottom: 20%;
+    left: 15%;
+    width: clamp(2.5rem, 5vw, 3.5rem);
+    opacity: 0.12;
+}
+
+.hero-ornament--4 {
+    bottom: 15%;
+    right: 12%;
+    width: clamp(3.5rem, 8vw, 5.5rem);
+    opacity: 0.07;
+}
+
 @media (max-width: 768px) {
     .hero {
         padding: 3rem 1.5rem;
@@ -65,5 +110,10 @@
 
     .hero-label {
         letter-spacing: 0.2em;
+    }
+
+    .hero-ornament--1,
+    .hero-ornament--4 {
+        display: none;
     }
 }
