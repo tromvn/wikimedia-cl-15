@@ -101,16 +101,13 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
 }
 
-.hito--center .hito-card {
-    margin-left: 0.75rem;
+.hito--center .hito-card,
+.hito--right .hito-card {
+    margin-left: 4rem;
 }
 
 .hito--left .hito-card {
-    margin-right: 0.75rem;
-}
-
-.hito--right .hito-card {
-    margin-left: 0.75rem;
+    margin-right: 4rem;
 }
 
 /* .hito:nth-child(4n+1) .hito-card,
@@ -161,12 +158,12 @@
 /* ===== Marcadores ===== */
 .hito-marker {
     position: absolute;
-    top: 1.5rem;
-    width: 40px;
-    height: 40px;
+    top: 50%;
+    width: 6.25rem;
+    height: 6.25rem;
     border-radius: 50%;
     background: var(--color-accent-blue);
-    border: 3px solid var(--color-base);
+    border: 4px solid var(--color-base);
     z-index: 10;
 
     display: flex;
@@ -175,8 +172,8 @@
 }
 
 .hito-marker-icon {
-    width: 22px;
-    height: 22px;
+    width: 4.375rem;
+    height: 4.375rem;
     filter: brightness(0) invert(1);
     pointer-events: none;
 }
@@ -184,12 +181,12 @@
 .hito--center .hito-marker,
 .hito--right .hito-marker {
     left: 0;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
 }
 
 .hito--left .hito-marker {
     right: 0;
-    transform: translateX(50%);
+    transform: translate(50%, -50%);
 }
 
 /* .hito:nth-child(4n+1) .hito-marker,
@@ -303,14 +300,15 @@
 
     .hito-card {
         max-width: none;
-        margin-left: 1rem !important;
+        margin-left: 4.5rem !important;
         margin-right: 0 !important;
     }
 
     .hito-marker {
         left: 0 !important;
         right: auto !important;
-        transform: translateX(-50%) !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
 
     .timeline-controls {
@@ -352,22 +350,22 @@
     .hito:nth-child(odd) .hito-marker {
         right: 0;
         left: auto;
-        transform: translateX(50%);
+        transform: translate(50%, -50%);
     }
 
     .hito:nth-child(even) .hito-marker {
         left: 0;
         right: auto;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
     }
 
     .hito:nth-child(odd) .hito-card {
-        margin-right: 1rem;
+        margin-right: 4rem;
         margin-left: 0;
     }
 
     .hito:nth-child(even) .hito-card {
-        margin-left: 1rem;
+        margin-left: 4rem;
         margin-right: 0;
     }
 }
