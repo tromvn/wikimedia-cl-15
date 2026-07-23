@@ -4,8 +4,6 @@ import {
   getHitoById,
   shouldShowAction
 } from "./data.js";
-import { renderPath } from "./svg.js";
-
 const timelineEl = document.querySelector("#timeline");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const categorySelect = document.querySelector(".timeline-category-select select");
@@ -42,8 +40,6 @@ function renderVisible(filterType, query, filterCategory) {
     el.classList.remove("hito--left", "hito--center", "hito--right");
     el.classList.add(`hito--${layout}`);
   });
-
-  renderPath();
 }
 
 function setActiveFilter(type) {

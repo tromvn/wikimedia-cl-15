@@ -1,6 +1,5 @@
 import "./style.css";
 import { hitos } from "./data.js";
-import { initSVG, renderPath } from "./svg.js";
 import { initDialog, openDialogById } from "./dialog.js";
 import { initFilters, renderActions } from "./filters.js";
 
@@ -31,8 +30,6 @@ function renderTimeline() {
     .join("");
 
   renderActions();
-  initSVG(timelineEl);
-  renderPath();
 }
 
 function initApp() {
@@ -41,7 +38,6 @@ function initApp() {
   initDialog();
   initFilters();
 
-  initResizeHandler();
   initAnimations();
 
   const params = new URLSearchParams(window.location.search);
@@ -57,15 +53,5 @@ function initAnimations() {
     el.classList.add("hito--visible");
   });
 }
-
-function initResizeHandler() {
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(renderPath, 100);
-  });
-}
-
-
 
 initApp();
