@@ -76,16 +76,32 @@ function getMarkerPositions() {
   });
 }
 
-function buildSmoothPath(positions, tension = 0.2) {
+function buildSmoothPath(positions, tension = 0.55) {
   if (positions.length < 2) return "";
+
+  const first = positions[0];
+  const second = positions[1];
+  const virtualStart = {
+    x: first.x + (first.x - second.x),
+    y: first.y + (first.y - second.y),
+  };
+
+  const last = positions[positions.length - 1];
+  const secondToLast = positions[positions.length - 2];
+  const virtualEnd = {
+    x: last.x + (last.x - secondToLast.x),
+    y: last.y + (last.y - secondToLast.y),
+  };
+
+  const extended = [virtualStart, ...positions, virtualEnd];
 
   let pathData = `M ${positions[0].x} ${positions[0].y} `;
 
-  for (let i = 0; i < positions.length - 1; i++) {
-    const p0 = positions[i - 1] || positions[i];
-    const p1 = positions[i];
-    const p2 = positions[i + 1];
-    const p3 = positions[i + 2] || p2;
+  for (let i = 1; i < extended.length - 2; i++) {
+    const p0 = extended[i - 1];
+    const p1 = extended[i];
+    const p2 = extended[i + 1];
+    const p3 = extended[i + 2];
 
     const cp1x = p1.x + (p2.x - p0.x) * tension;
     const cp1y = p1.y + (p2.y - p0.y) * tension;
@@ -96,6 +112,10 @@ function buildSmoothPath(positions, tension = 0.2) {
   }
 
   return pathData;
+}
+
+function getTimelineCenterX() {
+  return timelineEl.offsetWidth / 2;
 }
 
 function animatePath() {
@@ -124,7 +144,14 @@ export function renderPath() {
     return;
   }
 
-  const pathData = buildSmoothPath(positions);
+  const centerX = getTimelineCenterX();
+  const entryGap = 100;
+
+  const entry = { x: centerX, y: positions[0].y - entryGap };
+  const exit = { x: centerX, y: positions[positions.length - 1].y + entryGap };
+  const extended = [entry, ...positions, exit];
+
+  const pathData = buildSmoothPath(extended);
   pathEl.setAttribute("d", pathData);
   glowEl.setAttribute("d", pathData);
 
