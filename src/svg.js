@@ -141,10 +141,9 @@ export function renderPath() {
   }
 
   const gapBelow = 128;
-  const gapAbove = 128;
   const mid0 = { x: positions[0].x, y: positions[0].y + gapBelow };
   const mid1 = positions[1]
-    ? { x: positions[1].x, y: positions[1].y - gapAbove }
+    ? { x: positions[1].x, y: mid0.y }
     : null;
   const extended = mid1
     ? [positions[0], mid0, mid1, positions[1], ...positions.slice(2)]
