@@ -140,8 +140,9 @@ export function renderPath() {
     return;
   }
 
-  const gap = 80;
-  const mid = { x: positions[0].x, y: positions[0].y + gap };
+  const gap = 128;
+  const offsetX = 32;
+  const mid = { x: positions[0].x + offsetX, y: positions[0].y + gap };
   const extended = [positions[0], mid, ...positions.slice(1)];
 
   const pathData = buildSmoothPath(extended);
