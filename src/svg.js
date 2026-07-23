@@ -140,7 +140,7 @@ export function renderPath() {
     return;
   }
 
-  const gap = 48;
+  const gap = 160;
   const point = { x: positions[0].x, y: positions[0].y + gap };
   const extended = [point, ...positions];
 
