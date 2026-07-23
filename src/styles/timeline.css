@@ -22,18 +22,13 @@
     z-index: 0;
 }
 
-.timeline-road-path {
-    stroke: var(--color-surface);
-    stroke-width: 70;
+.timeline-path {
+    stroke: var(--color-accent-blue);
+    stroke-width: 3;
+    fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-}
-
-.timeline-road-center {
-    stroke: rgba(255, 255, 255, 0.15);
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-dasharray: 12 12;
+    opacity: 0.5;
 }
 
 /* ===== Items container ===== */

@@ -5,10 +5,26 @@ import { initFilters, renderActions } from "./filters.js";
 
 const ROAD_MARGIN = 120;
 const ROAD_SEGMENT_HEIGHT = 360;
-const CURVE_RADIUS = 80;
 const MARKER_Y_BASE = 80;
 
 const timelineEl = document.querySelector("#timeline");
+
+function buildSmoothPath(positions, tension = 0.25) {
+  if (positions.length < 2) return "";
+  let d = `M ${positions[0].x} ${positions[0].y}`;
+  for (let i = 0; i < positions.length - 1; i++) {
+    const p0 = positions[i - 1] || positions[i];
+    const p1 = positions[i];
+    const p2 = positions[i + 1];
+    const p3 = positions[i + 2] || p2;
+    const cp1x = p1.x + (p2.x - p0.x) * tension;
+    const cp1y = p1.y + (p2.y - p0.y) * tension;
+    const cp2x = p2.x - (p3.x - p1.x) * tension;
+    const cp2y = p2.y - (p3.y - p1.y) * tension;
+    d += `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+  }
+  return d;
+}
 
 function renderTimeline() {
   const roadWidth = timelineEl.offsetWidth;
@@ -16,6 +32,11 @@ function renderTimeline() {
   const totalHeight = ROAD_SEGMENT_HEIGHT * count + 160;
 
   timelineEl.style.minHeight = `${totalHeight}px`;
+
+  const positions = hitos.map((_, index) => ({
+    x: index % 2 === 0 ? roadWidth - ROAD_MARGIN : ROAD_MARGIN,
+    y: MARKER_Y_BASE + 90 + index * ROAD_SEGMENT_HEIGHT,
+  }));
 
   const svgNS = "http://www.w3.org/2000/svg";
 
@@ -25,47 +46,21 @@ function renderTimeline() {
   svg.setAttribute("preserveAspectRatio", "none");
   svg.setAttribute("viewBox", `0 0 ${roadWidth} ${totalHeight}`);
 
-  const pathOuter = document.createElementNS(svgNS, "path");
-  pathOuter.id = "road-path";
-  pathOuter.classList.add("timeline-road-path");
+  const pathEl = document.createElementNS(svgNS, "path");
+  pathEl.classList.add("timeline-path");
+  pathEl.setAttribute("d", buildSmoothPath(positions));
 
-  const pathCenter = document.createElementNS(svgNS, "path");
-  pathCenter.id = "road-center";
-  pathCenter.classList.add("timeline-road-center");
-
-  svg.appendChild(pathOuter);
-  svg.appendChild(pathCenter);
+  svg.appendChild(pathEl);
   timelineEl.appendChild(svg);
-
-  let d = "";
-  let y = MARKER_Y_BASE;
-  const left = ROAD_MARGIN;
-  const right = roadWidth - ROAD_MARGIN;
-
-  for (let i = 0; i < count; i++) {
-    if (i === 0) d += `M ${left} ${y}`;
-
-    if (i % 2 === 0) {
-      d += `H ${right - CURVE_RADIUS} Q ${right} ${y} ${right} ${y + CURVE_RADIUS} V ${y + ROAD_SEGMENT_HEIGHT - CURVE_RADIUS} Q ${right} ${y + ROAD_SEGMENT_HEIGHT} ${right - CURVE_RADIUS} ${y + ROAD_SEGMENT_HEIGHT}`;
-    } else {
-      d += `H ${left + CURVE_RADIUS} Q ${left} ${y} ${left} ${y + CURVE_RADIUS} V ${y + ROAD_SEGMENT_HEIGHT - CURVE_RADIUS} Q ${left} ${y + ROAD_SEGMENT_HEIGHT} ${left + CURVE_RADIUS} ${y + ROAD_SEGMENT_HEIGHT}`;
-    }
-
-    y += ROAD_SEGMENT_HEIGHT;
-  }
-
-  pathOuter.setAttribute("d", d);
-  pathCenter.setAttribute("d", d);
 
   const itemsContainer = document.createElement("div");
   itemsContainer.id = "timeline-items";
   itemsContainer.classList.add("timeline-items");
   timelineEl.appendChild(itemsContainer);
 
-  y = MARKER_Y_BASE;
   hitos.forEach((hito, index) => {
-    const markerX = index % 2 === 0 ? right : left;
-    const markerY = MARKER_Y_BASE + CURVE_RADIUS + index * ROAD_SEGMENT_HEIGHT;
+    const markerX = positions[index].x;
+    const markerY = positions[index].y;
     const side = index % 2 === 0 ? "left" : "right";
 
     const item = document.createElement("div");
