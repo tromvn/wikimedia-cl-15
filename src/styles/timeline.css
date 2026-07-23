@@ -2,6 +2,9 @@
 #timeline {
     position: relative;
     min-height: 2400px;
+    background:
+        linear-gradient(rgba(26, 22, 37, 0.88), rgba(26, 22, 37, 0.88)),
+        url("/A_view_towards_Torres_Del_Paine.jpg") center / cover no-repeat fixed;
 }
 
 .timeline-section {
@@ -31,6 +34,16 @@
     opacity: 0.5;
 }
 
+/* ===== SVG year labels ===== */
+.timeline-year-labels text {
+    fill: var(--color-accent-blue);
+    font-size: 1.1rem;
+    font-weight: 700;
+    opacity: 0.7;
+    font-family: inherit;
+    pointer-events: none;
+}
+
 /* ===== Items container ===== */
 .timeline-items {
     position: absolute;
@@ -41,39 +54,21 @@
 /* ===== Items ===== */
 .timeline-item {
     position: absolute;
-    width: 320px;
+    width: 600px;
     opacity: 0;
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .timeline-item.show {
     opacity: 1;
 }
 
-.timeline-item.left {
-    transform: translateX(-100%);
-    margin-left: -70px;
-    text-align: right;
-}
-
-.timeline-item.left.show {
-    transform: translateX(-100%) translateY(0);
-}
-
-.timeline-item.right {
-    margin-left: 70px;
-    text-align: left;
-}
-
-.timeline-item.right.show {
-    transform: translateY(0);
-}
-
 /* ===== Marker ===== */
 .marker {
     position: absolute;
+    left: 300px;
+    top: 0;
+    transform: translate(-50%, 0);
     width: 88px;
     height: 88px;
     border-radius: 50%;
@@ -92,69 +87,40 @@
     filter: brightness(0) saturate(100%);
 }
 
-
-
 /* ===== Card ===== */
 .card {
     position: absolute;
     top: -10px;
-    width: 220px;
+    width: 260px;
+    text-align: center;
+    background: transparent;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
 }
 
-.left .card {
-    right: 115px;
+.item-left .card {
+    right: 371px;
 }
 
-.right .card {
-    left: 115px;
+.item-right .card {
+    left: 371px;
 }
 
-.year {
-    font-size: 2.3rem;
-    font-weight: 800;
-    color: var(--color-accent-blue);
-    line-height: 1;
-}
-
-.title {
-    margin-top: 0.4rem;
+.card .title {
     font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: var(--color-brand);
     text-transform: uppercase;
+    margin-bottom: 0.4rem;
 }
 
-.description {
-    margin-top: 0.6rem;
+.card .description {
     color: var(--color-text);
     font-size: 0.88rem;
     line-height: 1.6;
-}
-
-/* ===== Decorations ===== */
-.blob {
-    position: absolute;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, #55d9d5, #6b5cff);
-    opacity: 0.85;
-    filter: blur(0.2px);
-    z-index: 1;
-}
-
-.blob.small {
-    width: 26px;
-    height: 26px;
-}
-
-.blob.medium {
-    width: 54px;
-    height: 54px;
-}
-
-.blob.large {
-    width: 100px;
-    height: 100px;
 }
 
 /* ===== Filters ===== */
@@ -315,6 +281,8 @@
 
     .marker {
         position: relative;
+        left: 0;
+        transform: none;
         margin-bottom: 1.5rem;
     }
 
@@ -323,10 +291,6 @@
         left: auto !important;
         right: auto !important;
         width: 100%;
-    }
-
-    .blob {
-        display: none;
     }
 
     .timeline-controls {
