@@ -147,7 +147,7 @@ export function renderPath() {
     ? { x: positions[1].x, y: positions[1].y - gapAbove }
     : null;
   const extended = mid1
-    ? [positions[0], mid0, positions[1], mid1, ...positions.slice(2)]
+    ? [positions[0], mid0, mid1, positions[1], ...positions.slice(2)]
     : [positions[0], mid0, ...positions.slice(1)];
 
   const pathData = buildSmoothPath(extended);
