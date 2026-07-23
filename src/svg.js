@@ -142,19 +142,21 @@ export function renderPath() {
 
   const visibleHitos = timelineEl.querySelectorAll(".hito:not(.hito--hidden)");
   const timelineRect = timelineEl.getBoundingClientRect();
-  const cardBottoms = [...visibleHitos].map((hito) => {
+  const cardRects = [...visibleHitos].map((hito) => {
     const card = hito.querySelector(".hito-card");
     const rect = card.getBoundingClientRect();
-    return rect.bottom - timelineRect.top;
+    return {
+      top: rect.top - timelineRect.top,
+      bottom: rect.bottom - timelineRect.top,
+    };
   });
 
-  const uniformMargin = 48;
   const extended = [];
 
   for (let i = 0; i < positions.length; i++) {
     extended.push(positions[i]);
     if (i < positions.length - 1) {
-      const ncY = cardBottoms[i] + uniformMargin;
+      const ncY = (cardRects[i].bottom + cardRects[i + 1].top) / 2;
       const ncBelow = { x: positions[i].x, y: ncY };
       const ncAbove = { x: positions[i + 1].x, y: ncY };
       extended.push(ncBelow, ncAbove);
