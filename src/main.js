@@ -46,9 +46,9 @@ function renderTimeline() {
     if (i === 0) d += `M ${left} ${y}`;
 
     if (i % 2 === 0) {
-      d += `H ${right - CURVE_RADIUS} Q ${right} ${y} ${right} ${y + CURVE_RADIUS} V ${y + ROAD_SEGMENT_HEIGHT - CURVE_RADIUS} Q ${right} ${y + ROAD_SEGMENT_HEIGHT} ${right - CURVE_RADIUS} ${y + ROAD_SEGMENT_HEIGHT} H ${left + CURVE_RADIUS}`;
+      d += `H ${right - CURVE_RADIUS} Q ${right} ${y} ${right} ${y + CURVE_RADIUS} V ${y + ROAD_SEGMENT_HEIGHT - CURVE_RADIUS} Q ${right} ${y + ROAD_SEGMENT_HEIGHT} ${right - CURVE_RADIUS} ${y + ROAD_SEGMENT_HEIGHT}`;
     } else {
-      d += `H ${left + CURVE_RADIUS} Q ${left} ${y} ${left} ${y + CURVE_RADIUS} V ${y + ROAD_SEGMENT_HEIGHT - CURVE_RADIUS} Q ${left} ${y + ROAD_SEGMENT_HEIGHT} ${left + CURVE_RADIUS} ${y + ROAD_SEGMENT_HEIGHT} H ${right - CURVE_RADIUS}`;
+      d += `H ${left + CURVE_RADIUS} Q ${left} ${y} ${left} ${y + CURVE_RADIUS} V ${y + ROAD_SEGMENT_HEIGHT - CURVE_RADIUS} Q ${left} ${y + ROAD_SEGMENT_HEIGHT} ${left + CURVE_RADIUS} ${y + ROAD_SEGMENT_HEIGHT}`;
     }
 
     y += ROAD_SEGMENT_HEIGHT;
