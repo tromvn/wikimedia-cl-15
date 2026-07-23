@@ -76,42 +76,46 @@ function getMarkerPositions() {
   });
 }
 
-function buildSmoothPath(positions, tension = 0) {
-  if (positions.length < 2) return "";
+function buildRoundedPath(points, cornerRadius) {
+  if (points.length < 2) return "";
 
-  const first = positions[0];
-  const second = positions[1];
-  const virtualStart = {
-    x: first.x + (first.x - second.x),
-    y: first.y + (first.y - second.y),
-  };
+  let d = `M ${points[0].x} ${points[0].y}`;
 
-  const last = positions[positions.length - 1];
-  const secondToLast = positions[positions.length - 2];
-  const virtualEnd = {
-    x: last.x + (last.x - secondToLast.x),
-    y: last.y + (last.y - secondToLast.y),
-  };
+  for (let i = 1; i < points.length - 1; i++) {
+    const prev = points[i - 1];
+    const curr = points[i];
+    const next = points[i + 1];
 
-  const extended = [virtualStart, ...positions, virtualEnd];
+    const dxIn = curr.x - prev.x;
+    const dyIn = curr.y - prev.y;
+    const lenIn = Math.sqrt(dxIn * dxIn + dyIn * dyIn);
+    const dxOut = next.x - curr.x;
+    const dyOut = next.y - curr.y;
+    const lenOut = Math.sqrt(dxOut * dxOut + dyOut * dyOut);
 
-  let pathData = `M ${positions[0].x} ${positions[0].y} `;
+    const r = Math.min(cornerRadius, lenIn / 2, lenOut / 2);
 
-  for (let i = 1; i < extended.length - 2; i++) {
-    const p0 = extended[i - 1];
-    const p1 = extended[i];
-    const p2 = extended[i + 1];
-    const p3 = extended[i + 2];
+    if (r <= 0) {
+      d += ` L ${curr.x} ${curr.y}`;
+      continue;
+    }
 
-    const cp1x = p1.x + (p2.x - p0.x) * tension;
-    const cp1y = p1.y + (p2.y - p0.y) * tension;
-    const cp2x = p2.x - (p3.x - p1.x) * tension;
-    const cp2y = p2.y - (p3.y - p1.y) * tension;
+    const ratioIn = r / lenIn;
+    const ratioOut = r / lenOut;
 
-    pathData += `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y} `;
+    const tx = curr.x - dxIn * ratioIn;
+    const ty = curr.y - dyIn * ratioIn;
+    const ex = curr.x + dxOut * ratioOut;
+    const ey = curr.y + dyOut * ratioOut;
+
+    d += ` L ${tx} ${ty}`;
+    d += ` Q ${curr.x} ${curr.y}, ${ex} ${ey}`;
   }
 
-  return pathData;
+  const last = points[points.length - 1];
+  d += ` L ${last.x} ${last.y}`;
+
+  return d;
 }
 
 function animatePath() {
@@ -163,7 +167,7 @@ export function renderPath() {
     }
   }
 
-  const pathData = buildSmoothPath(extended);
+  const pathData = buildRoundedPath(extended, 16);
   pathEl.setAttribute("d", pathData);
   glowEl.setAttribute("d", pathData);
 
