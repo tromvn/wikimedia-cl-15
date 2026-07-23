@@ -114,10 +114,6 @@ function buildSmoothPath(positions, tension = 0.2) {
   return pathData;
 }
 
-function getTimelineCenterX() {
-  return timelineEl.offsetWidth / 2;
-}
-
 function animatePath() {
   const length = pathEl.getTotalLength();
 
@@ -144,9 +140,8 @@ export function renderPath() {
     return;
   }
 
-  const centerX = getTimelineCenterX();
   const gap = 48;
-  const point = { x: centerX, y: positions[0].y + gap };
+  const point = { x: positions[0].x, y: positions[0].y + gap };
   const extended = [point, ...positions];
 
   const pathData = buildSmoothPath(extended);
