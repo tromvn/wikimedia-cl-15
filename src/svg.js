@@ -76,7 +76,7 @@ function getMarkerPositions() {
   });
 }
 
-function buildSmoothPath(positions, tension = 0.2) {
+function buildSmoothPath(positions, tension = 0) {
   if (positions.length < 2) return "";
 
   const first = positions[0];
@@ -141,8 +141,7 @@ export function renderPath() {
   }
 
   const gap = 128;
-  const offsetX = 32;
-  const mid = { x: positions[0].x + offsetX, y: positions[0].y + gap };
+  const mid = { x: positions[0].x, y: positions[0].y + gap };
   const extended = [positions[0], mid, ...positions.slice(1)];
 
   const pathData = buildSmoothPath(extended);
