@@ -140,7 +140,7 @@ export function renderPath() {
     return;
   }
 
-  const gapBelow = 256;
+  const gapBelow = 128;
   const extended = [];
 
   for (let i = 0; i < positions.length; i++) {
