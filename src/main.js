@@ -9,27 +9,24 @@ const timelineEl = document.querySelector("#timeline");
 function renderTimeline() {
   timelineEl.innerHTML = hitos
     .map((hito, index) => {
-      const layout = index % 2 === 0 ? "left" : "right";
+      const side = index % 2 === 0 ? "left" : "right";
+      const type = (index % 3) + 1;
 
       return `
-   <li class="hito hito--${layout}"
+<li class="hito hito--${side} hito--type${type}"
     data-id="${hito.id}"
     data-type="${hito.type ?? ""}"
-    data-category="${hito.category}"
-    >
-      <span class="hito-marker">
-        ${hito.icon ? `<img class="hito-marker-icon" src="${hito.icon}" alt="" aria-hidden="true" />` : ""}
-      </span>
-
-      <article class="hito-card">
-        <span class="hito-year">${hito.date.slice(0, 4)}</span>
-        <h3 class="hito-title">${hito.title}</h3>
-        <p class="hito-body">${hito.body}</p>
-
-        <div class="hito-actions"></div>
-      </article>
-    </li>
-  `;
+    data-category="${hito.category}">
+  <span class="hito-marker">
+    ${hito.icon ? `<img class="hito-marker-icon" src="${hito.icon}" alt="" />` : ""}
+  </span>
+  <time class="hito-date">${hito.date.slice(0, 4)}</time>
+  <article class="hito-card">
+    <h3 class="hito-title">${hito.title}</h3>
+    <p class="hito-body">${hito.body}</p>
+    <div class="hito-actions"></div>
+  </article>
+</li>`;
     })
     .join("");
 
