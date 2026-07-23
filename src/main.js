@@ -9,7 +9,7 @@ const MARKER_Y_BASE = 80;
 
 const timelineEl = document.querySelector("#timeline");
 
-function buildSmoothPath(positions, tension = 0.25) {
+function buildSmoothPath(positions, tension = 0.5) {
   if (positions.length < 2) return "";
   let d = `M ${positions[0].x} ${positions[0].y}`;
   for (let i = 0; i < positions.length - 1; i++) {
