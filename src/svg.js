@@ -76,7 +76,7 @@ function getMarkerPositions() {
   });
 }
 
-function buildSmoothPath(positions, tension = 0.55) {
+function buildSmoothPath(positions, tension = 0.2) {
   if (positions.length < 2) return "";
 
   const first = positions[0];
@@ -145,11 +145,9 @@ export function renderPath() {
   }
 
   const centerX = getTimelineCenterX();
-  const entryGap = 100;
-
-  const entry = { x: centerX, y: positions[0].y - entryGap };
-  const exit = { x: centerX, y: positions[positions.length - 1].y + entryGap };
-  const extended = [entry, ...positions, exit];
+  const gap = 48;
+  const point = { x: centerX, y: positions[0].y + gap };
+  const extended = [point, ...positions];
 
   const pathData = buildSmoothPath(extended);
   pathEl.setAttribute("d", pathData);
