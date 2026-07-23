@@ -140,14 +140,23 @@ export function renderPath() {
     return;
   }
 
-  const gapBelow = 128;
+  const visibleHitos = timelineEl.querySelectorAll(".hito:not(.hito--hidden)");
+  const timelineRect = timelineEl.getBoundingClientRect();
+  const cardBottoms = [...visibleHitos].map((hito) => {
+    const card = hito.querySelector(".hito-card");
+    const rect = card.getBoundingClientRect();
+    return rect.bottom - timelineRect.top;
+  });
+
+  const uniformMargin = 48;
   const extended = [];
 
   for (let i = 0; i < positions.length; i++) {
     extended.push(positions[i]);
     if (i < positions.length - 1) {
-      const ncBelow = { x: positions[i].x, y: positions[i].y + gapBelow };
-      const ncAbove = { x: positions[i + 1].x, y: ncBelow.y };
+      const ncY = cardBottoms[i] + uniformMargin;
+      const ncBelow = { x: positions[i].x, y: ncY };
+      const ncAbove = { x: positions[i + 1].x, y: ncY };
       extended.push(ncBelow, ncAbove);
     }
   }
