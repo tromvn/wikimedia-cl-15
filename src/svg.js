@@ -156,7 +156,7 @@ export function renderPath() {
   for (let i = 0; i < positions.length; i++) {
     extended.push(positions[i]);
     if (i < positions.length - 1) {
-      const ncY = (cardRects[i].bottom + cardRects[i + 1].top) / 2;
+      const ncY = cardRects[i].bottom + 16;
       const ncBelow = { x: positions[i].x, y: ncY };
       const ncAbove = { x: positions[i + 1].x, y: ncY };
       extended.push(ncBelow, ncAbove);
