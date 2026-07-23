@@ -27,7 +27,7 @@
 
 @media (max-width: 768px) {
     .site-header-inner {
-        flex-direction: column;
+        flex-direction: row;
         align-items: stretch;
         gap: 1rem;
     }

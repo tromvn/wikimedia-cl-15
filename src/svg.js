@@ -76,7 +76,7 @@ function getMarkerPositions() {
   });
 }
 
-function buildSmoothPath(positions, tension = 0.25) {
+function buildSmoothPath(positions, tension = 0.2) {
   if (positions.length < 2) return "";
 
   let pathData = `M ${positions[0].x} ${positions[0].y} `;

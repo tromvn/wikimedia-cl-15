@@ -22,6 +22,22 @@
     position: relative;
 }
 
+.hito {
+    position: relative;
+    z-index: 2;
+}
+
+.hito--visible .hito-card {
+    animation: card-enter 400ms ease-out forwards;
+}
+
+@keyframes card-enter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .hito--center {
     grid-column: 2;
     display: flex;
@@ -39,54 +55,6 @@
     display: flex;
     justify-content: flex-start;
 }
-
-.hito {
-    position: relative;
-    z-index: 2;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.hito--visible {
-    animation: card-enter 400ms ease-out forwards;
-}
-
-@keyframes card-enter {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Centro */
-/* .hito:nth-child(3n + 1) {
-    grid-column: 2;
-    display: flex;
-    justify-content: center;
-} */
-
-/* Izquierda */
-/* .hito:nth-child(3n + 2) {
-    grid-column: 1;
-    display: flex;
-    justify-content: flex-end;
-} */
-
-/* Derecha */
-/* .hito:nth-child(3n + 3) {
-    grid-column: 3;
-    display: flex;
-    justify-content: flex-start;
-} */
-
-/* Centro */
-/* .hito:nth-child(4n) {
-    grid-column: 2;
-    display: flex;
-    justify-content: center;
-} */
-
-
 
 /* ===== Hidden state (filters) ===== */
 .hito--hidden {
@@ -107,7 +75,11 @@
 .hito-card {
     position: relative;
     z-index: 2;
+    opacity: 0;
+
+    transform: translateY(30px);
     max-width: 32rem;
+
     padding: 1.5rem;
     border-radius: 1rem;
     background: var(--color-surface);
@@ -124,27 +96,15 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
 }
 
-.hito--center .hito-card,
+/* Derecha */
 .hito--right .hito-card {
     margin-left: 4rem;
 }
 
+/* Izquierda */
 .hito--left .hito-card {
     margin-right: 4rem;
 }
-
-/* .hito:nth-child(4n+1) .hito-card,
-.hito:nth-child(4n+4) .hito-card {
-    margin-left: 1.5rem;
-}
-
-.hito:nth-child(4n+2) .hito-card {
-    margin-right: 1rem;
-}
-
-.hito:nth-child(4n+3) .hito-card {
-    margin-left: 1rem;
-} */
 
 /* ===== Contenido ===== */
 .hito-body {
@@ -201,32 +161,36 @@
     pointer-events: none;
 }
 
-.hito--center .hito-marker,
+.hito--left,
+.hito--right,
+.hito--marker-bottom {
+    transform: translateX(var(--x-offset, 0px));
+}
+
+/* Derecha */
 .hito--right .hito-marker {
     left: 0;
     transform: translate(-50%, -50%);
 }
 
+/* Izquierda */
 .hito--left .hito-marker {
     right: 0;
     transform: translate(50%, -50%);
 }
 
-/* .hito:nth-child(4n+1) .hito-marker,
-.hito:nth-child(4n+4) .hito-marker {
-    left: 0;
-    transform: translateX(-50%);
+.hito--marker-bottom .hito-card {
+    margin: 0 auto;
+    margin-bottom: 4rem;
 }
 
-.hito:nth-child(4n+2) .hito-marker {
-    right: 0;
-    transform: translateX(50%);
+.hito--marker-bottom .hito-marker {
+    top: auto;
+    bottom: -0.075rem;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, 50%);
 }
-
-.hito:nth-child(4n+3) .hito-marker {
-    left: 0;
-    transform: translateX(-50%);
-} */
 
 /* ===== Línea temporal ===== */
 .timeline-svg {
