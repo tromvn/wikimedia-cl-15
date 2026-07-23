@@ -92,31 +92,7 @@
     filter: brightness(0) saturate(100%);
 }
 
-.marker::before {
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 70px;
-    background-image: repeating-linear-gradient(
-        to bottom,
-        #9ca3af 0,
-        #9ca3af 3px,
-        transparent 3px,
-        transparent 7px
-    );
-    top: -70px;
-}
 
-.marker::after {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--color-accent-blue);
-    border: 3px solid #fff;
-    top: -86px;
-}
 
 /* ===== Card ===== */
 .card {
@@ -340,11 +316,6 @@
     .marker {
         position: relative;
         margin-bottom: 1.5rem;
-    }
-
-    .marker::before,
-    .marker::after {
-        display: none;
     }
 
     .card {

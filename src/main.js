@@ -9,20 +9,17 @@ const MARKER_Y_BASE = 80;
 
 const timelineEl = document.querySelector("#timeline");
 
-function buildSmoothPath(positions, tension = 0.5) {
+function buildSpinePath(positions, centerX) {
   if (positions.length < 2) return "";
-  let d = `M ${positions[0].x} ${positions[0].y}`;
-  for (let i = 0; i < positions.length - 1; i++) {
-    const p0 = positions[i - 1] || positions[i];
-    const p1 = positions[i];
-    const p2 = positions[i + 1];
-    const p3 = positions[i + 2] || p2;
-    const cp1x = p1.x + (p2.x - p0.x) * tension;
-    const cp1y = p1.y + (p2.y - p0.y) * tension;
-    const cp2x = p2.x - (p3.x - p1.x) * tension;
-    const cp2y = p2.y - (p3.y - p1.y) * tension;
-    d += `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+  const first = positions[0];
+  const last = positions[positions.length - 1];
+
+  let d = `M ${centerX} ${first.y} L ${centerX} ${last.y}`;
+
+  for (const p of positions) {
+    d += ` M ${centerX} ${p.y} L ${p.x} ${p.y}`;
   }
+
   return d;
 }
 
@@ -43,12 +40,12 @@ function renderTimeline() {
   const svg = document.createElementNS(svgNS, "svg");
   svg.id = "road";
   svg.classList.add("timeline-road");
-  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   svg.setAttribute("viewBox", `0 0 ${roadWidth} ${totalHeight}`);
 
   const pathEl = document.createElementNS(svgNS, "path");
   pathEl.classList.add("timeline-path");
-  pathEl.setAttribute("d", buildSmoothPath(positions));
+  pathEl.setAttribute("d", buildSpinePath(positions, roadWidth / 2));
 
   svg.appendChild(pathEl);
   timelineEl.appendChild(svg);
