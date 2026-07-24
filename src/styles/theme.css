@@ -12,3 +12,38 @@
     --color-accent-green: #308557;
     --color-accent-green-text: #8fd4ac;
 }
+
+:root {
+    --color-bg-overlay: rgba(23, 20, 18, 0.65);
+    --color-header-bg: rgba(23, 20, 18, 0.75);
+    --color-text-muted: rgba(255, 255, 255, 0.55);
+    --color-border-light: rgba(255, 255, 255, 0.08);
+    --color-toggle-border: rgba(255, 255, 255, 0.15);
+    --color-control-bg-hover: rgba(255, 255, 255, 0.1);
+    --color-control-bg-hover2: rgba(255, 255, 255, 0.2);
+    --color-placeholder: rgba(255, 255, 255, 0.35);
+}
+
+html[data-theme="light"] {
+    --color-base: #f5f3f0;
+    --color-surface: rgba(255, 255, 255, 0.5);
+    --color-overlay: #e8e4de;
+    --color-scrim: #ffffff;
+
+    --color-text: #1a1611;
+    --color-brand: #c49400;
+    --color-accent-warm: #d4c9b0;
+
+    --color-accent-blue: #0070b3;
+    --color-accent-green: #2a6e48;
+    --color-accent-green-text: #3a8e5e;
+
+    --color-bg-overlay: rgba(245, 243, 240, 0.25);
+    --color-header-bg: rgba(255, 255, 255, 0.75);
+    --color-text-muted: rgba(0, 0, 0, 0.5);
+    --color-border-light: rgba(0, 0, 0, 0.1);
+    --color-toggle-border: rgba(0, 0, 0, 0.2);
+    --color-control-bg-hover: rgba(0, 0, 0, 0.06);
+    --color-control-bg-hover2: rgba(0, 0, 0, 0.12);
+    --color-placeholder: rgba(0, 0, 0, 0.35);
+}

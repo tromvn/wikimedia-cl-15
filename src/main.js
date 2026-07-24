@@ -78,6 +78,11 @@ function renderTimeline() {
 
     cursorY += YEAR_PILL_H + YEAR_GAP;
 
+    const yearLabel = document.createElement("div");
+    yearLabel.className = "year-label";
+    yearLabel.textContent = year;
+    itemsContainer.appendChild(yearLabel);
+
     group.forEach((hito) => {
       const side = globalIndex % 2 === 0 ? "item-left" : "item-right";
       const markerX = side === "item-left"
@@ -172,8 +177,8 @@ function renderTimeline() {
     rect.setAttribute("height", ph);
     rect.setAttribute("rx", rx);
     rect.setAttribute("ry", ry);
-    rect.setAttribute("fill", "var(--color-accent-blue)");
-    rect.setAttribute("opacity", "0.9");
+    rect.setAttribute("fill", "var(--color-brand)");
+    rect.setAttribute("opacity", "0.85");
     extraG.appendChild(rect);
 
     const text = document.createElementNS(svgNS, "text");
@@ -229,7 +234,27 @@ function observeItems() {
   document.querySelectorAll(".timeline-item").forEach((item) => observer.observe(item));
 }
 
+function initTheme() {
+  const html = document.documentElement;
+  const saved = localStorage.getItem("theme");
+  if (saved === "light") html.setAttribute("data-theme", "light");
+
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const isLight = html.getAttribute("data-theme") === "light";
+    if (isLight) {
+      html.removeAttribute("data-theme");
+      localStorage.setItem("theme", "dark");
+    } else {
+      html.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+    }
+  });
+}
+
 function initApp() {
+  initTheme();
   renderTimeline();
   initDialog();
   initFilters();
