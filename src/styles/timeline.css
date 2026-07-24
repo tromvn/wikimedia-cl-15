@@ -2,9 +2,6 @@
 #timeline {
     position: relative;
     min-height: 2400px;
-    background:
-        linear-gradient(var(--color-bg-overlay), var(--color-bg-overlay)),
-        url("/A_view_towards_Torres_Del_Paine.jpg") center / cover no-repeat fixed;
 }
 
 .timeline-section {
@@ -104,8 +101,6 @@
     width: 260px;
     text-align: center;
     background: transparent;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     padding: 0.75rem 1rem;
     border-radius: 1rem;
 }

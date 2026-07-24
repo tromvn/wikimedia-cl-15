@@ -1,5 +1,4 @@
 .site-main {
-    background: var(--color-base);
     color: var(--color-text);
     min-height: 100vh;
 }

@@ -16,6 +16,7 @@
 :root {
     --color-bg-overlay: rgba(23, 20, 18, 0.65);
     --color-header-bg: rgba(23, 20, 18, 0.75);
+    --color-hero-bg: rgba(255, 255, 255, 0.06);
     --color-text-muted: rgba(255, 255, 255, 0.55);
     --color-border-light: rgba(255, 255, 255, 0.08);
     --color-toggle-border: rgba(255, 255, 255, 0.15);
@@ -30,20 +31,21 @@ html[data-theme="light"] {
     --color-overlay: #e8e4de;
     --color-scrim: #ffffff;
 
-    --color-text: #1a1611;
-    --color-brand: #c49400;
+    --color-text: #f9f9f0;
+    --color-brand: #f0bc00;
     --color-accent-warm: #d4c9b0;
 
-    --color-accent-blue: #0070b3;
+    --color-accent-blue: #049dff;
     --color-accent-green: #2a6e48;
     --color-accent-green-text: #3a8e5e;
 
     --color-bg-overlay: rgba(245, 243, 240, 0.25);
-    --color-header-bg: rgba(255, 255, 255, 0.75);
-    --color-text-muted: rgba(0, 0, 0, 0.5);
-    --color-border-light: rgba(0, 0, 0, 0.1);
-    --color-toggle-border: rgba(0, 0, 0, 0.2);
-    --color-control-bg-hover: rgba(0, 0, 0, 0.06);
-    --color-control-bg-hover2: rgba(0, 0, 0, 0.12);
-    --color-placeholder: rgba(0, 0, 0, 0.35);
+    --color-header-bg: rgba(255, 255, 255, 0.3);
+    --color-hero-bg: rgba(0, 0, 0, 0.08);
+    --color-text-muted: rgba(255, 255, 255, 0.5);
+    --color-border-light: rgba(255, 255, 255, 0.15);
+    --color-toggle-border: rgba(255, 255, 255, 0.3);
+    --color-control-bg-hover: rgba(255, 255, 255, 0.12);
+    --color-control-bg-hover2: rgba(255, 255, 255, 0.2);
+    --color-placeholder: rgba(255, 255, 255, 0.4);
 }
