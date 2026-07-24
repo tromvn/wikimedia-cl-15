@@ -40,6 +40,13 @@ function buildSpinePath(positions, centerX, yearMarkers) {
 }
 
 function renderTimeline() {
+  const oldSvg = document.querySelector("#road");
+  if (oldSvg) oldSvg.remove();
+  const oldContainer = document.querySelector("#timeline-items");
+  if (oldContainer) oldContainer.remove();
+  const currentMin = timelineEl.style.minHeight;
+  if (currentMin) timelineEl.style.minHeight = "";
+
   const roadWidth = timelineEl.offsetWidth;
   const centerX = roadWidth / 2;
   const yearGroups = groupByYear(hitos);
@@ -139,7 +146,7 @@ function renderTimeline() {
   const svg = document.createElementNS(svgNS, "svg");
   svg.id = "road";
   svg.classList.add("timeline-road");
-  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  svg.setAttribute("preserveAspectRatio", "xMinYMin meet");
   svg.setAttribute("viewBox", `0 0 ${roadWidth} ${totalHeight}`);
 
   const pathEl = document.createElementNS(svgNS, "path");
@@ -174,7 +181,7 @@ function renderTimeline() {
     text.setAttribute("y", py + ph / 2);
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("dominant-baseline", "central");
-    text.setAttribute("fill", "#1a1625");
+    text.setAttribute("fill", "var(--color-base)");
     text.setAttribute("font-weight", "700");
     text.setAttribute("font-size", "1rem");
     text.textContent = year;
@@ -194,6 +201,17 @@ function renderTimeline() {
   timelineEl.prepend(svg);
 
   observeItems();
+  scheduleRedraw();
+}
+
+function scheduleRedraw() {
+  let timer;
+  const breakpoint = 900;
+  window.addEventListener("resize", () => {
+    clearTimeout(timer);
+    if (window.innerWidth <= breakpoint) return;
+    timer = setTimeout(renderTimeline, 180);
+  });
 }
 
 function observeItems() {

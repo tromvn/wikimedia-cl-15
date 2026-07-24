@@ -3,7 +3,7 @@
     position: relative;
     min-height: 2400px;
     background:
-        linear-gradient(rgba(26, 22, 37, 0.88), rgba(26, 22, 37, 0.88)),
+        linear-gradient(rgba(23, 20, 18, 0.65), rgba(23, 20, 18, 0.65)),
         url("/A_view_towards_Torres_Del_Paine.jpg") center / cover no-repeat fixed;
 }
 
@@ -84,8 +84,8 @@
     width: 260px;
     text-align: center;
     background: transparent;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 0.75rem 1rem;
     border-radius: 1rem;
 }
@@ -281,18 +281,25 @@
 
     .timeline-item {
         position: relative;
+        left: auto !important;
+        top: auto !important;
         width: 100%;
-        margin: 0;
+        margin: 0 0 3rem;
         transform: none !important;
         text-align: left;
         opacity: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .marker {
         position: relative;
-        left: 0;
+        left: auto;
+        top: auto;
         transform: none;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .card {
@@ -300,6 +307,8 @@
         left: auto !important;
         right: auto !important;
         width: 100%;
+        max-width: 480px;
+        margin: 0;
     }
 
     .timeline-controls {

@@ -3,6 +3,7 @@
 #hito-dialog {
     width: min(90vw, 700px);
     max-height: 85vh;
+    margin: auto;
 
     overflow: hidden;
 
@@ -10,6 +11,8 @@
     border-radius: 1rem;
 
     background: var(--color-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .dialog-panel {
