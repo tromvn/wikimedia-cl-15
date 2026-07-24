@@ -8,6 +8,11 @@
     max-width: 1200px;
     margin-inline: auto;
     padding: 4rem 1.5rem;
+    background: rgba(26, 22, 37, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 2rem;
+    margin-top: 1.5rem;
 }
 
 .hero-content {

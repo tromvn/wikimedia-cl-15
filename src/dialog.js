@@ -117,7 +117,7 @@ export function initDialog() {
 }
 
 export function openDialogById(id) {
-  const el = document.querySelector(`.hito[data-id="${id}"]`);
+  const el = document.querySelector(`[data-id="${id}"]`);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   openHitoDialog(id);
 }

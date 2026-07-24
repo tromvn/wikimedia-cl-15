@@ -3,7 +3,9 @@
     top: 0;
     z-index: 50;
 
-    background: var(--color-surface);
+    background: rgba(26, 22, 37, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
