@@ -16,7 +16,7 @@
 :root {
     --color-bg-overlay: rgba(23, 20, 18, 0.65);
     --color-header-bg: rgba(23, 20, 18, 0.75);
-    --color-hero-bg: rgba(255, 255, 255, 0.06);
+    --color-hero-bg: rgba(255, 255, 255, 0.00);
     --color-text-muted: rgba(255, 255, 255, 0.55);
     --color-border-light: rgba(255, 255, 255, 0.08);
     --color-toggle-border: rgba(255, 255, 255, 0.15);
@@ -27,7 +27,7 @@
 
 html[data-theme="light"] {
     --color-base: #f5f3f0;
-    --color-surface: rgba(255, 255, 255, 0.5);
+    --color-surface: rgba(30, 26, 22, 0.2);
     --color-overlay: #e8e4de;
     --color-scrim: #ffffff;
 
@@ -41,7 +41,7 @@ html[data-theme="light"] {
 
     --color-bg-overlay: rgba(245, 243, 240, 0.25);
     --color-header-bg: rgba(255, 255, 255, 0.3);
-    --color-hero-bg: rgba(0, 0, 0, 0.08);
+    --color-hero-bg: rgba(0, 0, 0, 0.10);
     --color-text-muted: rgba(255, 255, 255, 0.5);
     --color-border-light: rgba(255, 255, 255, 0.15);
     --color-toggle-border: rgba(255, 255, 255, 0.3);

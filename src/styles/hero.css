@@ -10,8 +10,8 @@
     padding: 0.75rem 1.5rem;
     border-radius: 0.75rem;
     background: var(--color-hero-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }
 
 .hero-content {
